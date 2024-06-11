@@ -1,70 +1,70 @@
 import React from 'react'
 export const KeyMetrics = () => {
     return (
-        <div className="grid grid-cols-2 gap-4 my-28 px-10">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-4 my-28 md:px-10">
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                <p className="text-sm text-center font-medium text-white/50">
                     Blockchain Network
-                </h3>
-                <p className="text-sm text-center font-medium text-white/50">
+                </p>
+                <h3 className="mb-2.5 text-xl text-center font-semibold">
                     Ethereum
-                </p>
+                </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                <p className="text-sm text-center font-medium text-white/50">
                     Total Supply
-                </h3>
-                <p className="text-sm text-center font-medium text-white/50">
+                </p>
+                <h3 className="mb-2.5 text-xl text-center font-semibold">
                     5,000,000,000
-                </p>
+                </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                <p className="text-sm text-center font-medium text-white/50">
                     Pre-sale Price
-                </h3>
-                <p className="text-sm text-center font-medium text-white/50">
+                </p>
+                <h3 className="mb-2.5 text-xl text-center font-semibold">
                     $0.0008
-                </p>
+                </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                <p className="text-sm text-center font-medium text-white/50">
                     Launch Price
-                </h3>
-                <p className="text-sm text-center font-medium text-white/50">
+                </p>
+                <h3 className="mb-2.5 text-xl text-center font-semibold">
                     $0.001
-                </p>
+                </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                <p className="text-sm text-center font-medium text-white/50">
                     Initial Market Cap
-                </h3>
-                <p className="text-sm text-center font-medium text-white/50">
+                </p>
+                <h3 className="mb-2.5 text-xl text-center font-semibold">
                     $794,550
-                </p>
+                </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                <p className="text-sm text-center font-medium text-white/50">
                     Project Valuation
-                </h3>
-                <p className="text-sm text-center font-medium text-white/50">
+                </p>
+                <h3 className="mb-2.5 text-xl text-center font-semibold">
                     $4,500,000
-                </p>
+                </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                <p className="text-sm text-center font-medium text-white/50">
                     Hard Cap
-                </h3>
-                <p className="text-sm text-center font-medium text-white/50">
-                    $1,200,000
                 </p>
+                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                    $1,200,000
+                </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <h3 className="mb-2.5 text-xl text-center font-semibold">
-                    Token Launch
-                </h3>
                 <p className="text-sm text-center font-medium text-white/50">
-                    June 2024
+                    Token Launch
                 </p>
+                <h3 className="mb-2.5 text-xl text-center font-semibold">
+                    June 2024
+                </h3>
             </div>
         </div>
     );

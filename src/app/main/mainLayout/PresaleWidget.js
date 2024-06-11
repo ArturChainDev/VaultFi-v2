@@ -62,7 +62,7 @@ export const PressaleWidget = () => {
                           <button className="p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 bg-white/10">
                             <div className="relative flex">
                               <img
-                                src="/images/tokens/eth.svg"
+                                src="assets/images/tokens/eth.svg"
                                 alt="ETH"
                                 className="object-contain w-4 h-4"
                               />
@@ -72,13 +72,13 @@ export const PressaleWidget = () => {
                           <button className="p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 bg-white/10">
                             <div className="relative flex">
                               <img
-                                src="/images/tokens/usdt.svg"
+                                src="assets/images/tokens/usdt.svg"
                                 alt="USDT"
                                 className="object-contain w-4 h-4"
                               />
                               <img
                                 className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border-1 border-primary"
-                                src="/images/chains/ethereum.svg"
+                                src="assets/images/chains/ethereum.svg"
                               />
                             </div>
                             USDT
@@ -86,13 +86,13 @@ export const PressaleWidget = () => {
                           <button className="p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 bg-primary">
                             <div className="relative flex">
                               <img
-                                src="/images/tokens/usdc.webp"
+                                src="assets/images/tokens/usdc.webp"
                                 alt="USDC"
                                 className="object-contain w-4 h-4"
                               />
                               <img
                                 className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border-1 border-primary"
-                                src="/images/chains/ethereum.svg"
+                                src="assets/images/chains/ethereum.svg"
                               />
                             </div>
                             USDC
@@ -112,11 +112,12 @@ export const PressaleWidget = () => {
                       <div className="relative">
                         <input
                           type="number"
+                          inputmode="numeric"
                           className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-5">
                           <img
-                            src="/images/tokens/usdc.webp"
+                            src="assets/images/tokens/usdc.webp"
                             alt="USDC"
                             className="object-contain w-6 h-6"
                           />
@@ -154,6 +155,7 @@ export const PressaleWidget = () => {
                       <div className="relative">
                         <input
                           type="number"
+                          inputmode="numeric"
                           className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-5">
@@ -181,12 +183,12 @@ export const PressaleWidget = () => {
               </div>
             </div>
             <div className="flex md:w-2/3">
-              <div className="flex flex-col items-center md:gap-10 w-full p-0 md:p-7 bg-[#080531] rounded-2xl">
-                <div className="flex w-full p-3 pb-0 md:p-0 overflow-auto no-scrollbar">
+              <div className="flex flex-col items-center md:gap-10 w-full p-0 md:pb-14 md:p-7 bg-[#080531] rounded-2xl">
+                <div className="flex w-full p-3 md:p-0 no-scrollbar">
                   <div className="flex w-[540px] md:w-full flex-shrink-0 py-1">
                     <div id="chart" className="flex relative">
                       <img
-                        src="/assets/chart-7dVNq39j.svg"
+                        src="/assets/images/charts/VaultFi Presale Site - Graphic.png"
                         className="w-full h-auto"
                       />
                       <div className="absolute left-[10%] bottom-[6%] right-[-0.2%] top-0 flex h-full">
@@ -219,7 +221,7 @@ export const PressaleWidget = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center md:justify-center gap-3 md:gap-7 w-full p-3 md:p-0">
+                {/* <div className="flex items-center md:justify-center gap-3 md:gap-7 w-full p-3 md:p-0">
                   <div className="flex items-center gap-1 md:gap-3">
                     <div className="h-1.5 w-1.5 md:h-3 md:w-3 rounded-full bg-[#FF00FB]"></div>
                     <div className="text-[10px] md:text-sm font-medium">Users</div>
@@ -251,7 +253,7 @@ export const PressaleWidget = () => {
                       ></path>
                     </svg>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

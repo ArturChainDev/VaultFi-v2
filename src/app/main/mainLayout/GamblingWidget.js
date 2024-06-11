@@ -1,10 +1,10 @@
 import React from 'react';
 
 const TrueMark = () => {
-  return <img src="/assets/checkmark-Vx8p9cc5.png" class="h-11" />;
+  return <img src="/assets/images/mark/checkmark.png" class="h-11" />;
 };
 const FalseMark = () => {
-  return <img src="/assets/checkmark-Vx8p9cc5.png" class="h-11" />;
+  return <img src="/assets/images/mark/crossmark.png" class="h-11" />;
 };
 
 export const GamblingWidget = () => {
@@ -19,26 +19,31 @@ export const GamblingWidget = () => {
             <div class="flex gap-1 md:w-full">
               <div class="w-52 md:w-1/2"></div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
+                <img src="" />
                 <span class="font-medium text-center whitespace-nowrap">
                   VaultFi
                 </span>
               </div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
+                <img src="" />
                 <span class="font-medium text-center whitespace-nowrap">
                   HEX
                 </span>
               </div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
+                <img src="" />
                 <span class="font-medium text-center whitespace-nowrap">
                   AAVE
                 </span>
               </div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
+                <img src="" />
                 <span class="font-medium text-center whitespace-nowrap">
                   OHM
                 </span>
               </div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
+                <img src="" />
                 <span class="font-medium text-center whitespace-nowrap">
                   TIME
                 </span>
@@ -50,6 +55,7 @@ export const GamblingWidget = () => {
               </div>
               <div class="flex items-center justify-center w-28 py-3 px-5 bg-primary">
                 <TrueMark />
+                x2
               </div>
               <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A]">
                 <TrueMark />

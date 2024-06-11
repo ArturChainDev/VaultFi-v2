@@ -9,8 +9,8 @@ export const ExpanationWidget = () => {
                         HOW DOES IT WORK?
                     </h3>
                     <p class="text-sm text-center font-medium text-white/50 md:text-base max-w-[930px]">
-                        VaultFinance is a Decentralized Finance (DeFi) project, with APY backed by revenue-generating businesses. <br />
-                        Recognizing the challenges faced by previous DeFi projects, VaultFi has developed a clear roadmap that introduces several diversified sources of yield, aimed at resilience and sustainability.<br />
+                        VaultFinance is a Decentralized Finance (DeFi) project, with APY backed by revenue-generating businesses. <br /><br />
+                        Recognizing the challenges faced by previous DeFi projects, VaultFi has developed a clear roadmap that introduces several diversified sources of yield, aimed at resilience and sustainability.<br /><br />
                         This strategy is implemented in 3 key phases
                     </p>
                 </div>

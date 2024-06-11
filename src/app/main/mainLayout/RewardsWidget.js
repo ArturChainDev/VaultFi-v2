@@ -3,7 +3,7 @@ export const RewardsWidget = () => {
     return (
         <div class="flex flex-col items-center md:flex-row md:justify-between my-28">
             <div class="flex items-center justify-center w-full">
-                <img src="https://www.dropbox.com/scl/fi/gg5syeztfbtxgr3s9wpwd/Vault-Twitter-V1.png?rlkey=iik3h63p34m3rhowxdzl17aos&dl=0" class="w-full md:max-w-[520px]" />
+                <img src="assets/images/background/Vault Twitter V1.png" class="w-full md:max-w-[520px]" />
             </div>
             <div class="flex flex-col gap-2.5 md:gap-5">
                 <h3 class="text-center text-3xl font-extrabold italic uppercase md:text-6xl md:text-left">

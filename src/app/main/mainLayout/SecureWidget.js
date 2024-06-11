@@ -1,9 +1,8 @@
 import React from 'react';
 export const SecureWidget = () => {
   return (
-    <div className="flex flex-col gap-5 md:gap-10">
+    <div className="flex flex-col gap-5 md:gap-10 my-10">
       <h2 className="text-center text-3xl font-extrabold italic uppercase md:text-6xl">
-
         100% SECURE
       </h2>
       <div className="flex flex-wrap gap-3 md:gap-5 md:flex-nowrap">
@@ -19,7 +18,7 @@ export const SecureWidget = () => {
         <a
           href="#"
           target="_blank"
-          className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7"
+          className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7 w-full"
         >
           <img src="https://www.fintechfutures.com/files/2021/08/certik.png" className="mb-5 w-16 md:w-28" />
           <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -32,7 +31,7 @@ export const SecureWidget = () => {
         <a
           href="#"
           target="_blank"
-          className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7"
+          className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7 w-full"
         >
           <img src="https://pbs.twimg.com/media/GPZ3ZV8WkAEJZa2?format=jpg&name=medium" className="mb-5 w-16 md:w-28" />
           <h3 className="mb-2.5 text-xl text-center font-semibold">
