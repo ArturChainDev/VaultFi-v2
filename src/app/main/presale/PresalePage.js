@@ -17,7 +17,7 @@ import {
 } from '../mainLayout';
 const PresalePage = () => {
   return (
-    <div className="relative flex flex-col gap-5 md:gap-12 p-3 md:p-7 max-w-[1300px] mx-auto !pb-28">
+    <div className="relative flex flex-col gap-5 md:gap-8 p-3 md:px-18 md:p-7 md:pt-2 max-w-[1300px] mx-auto !pb-28">
       <Header />
       <div >
         <PressaleWidget />

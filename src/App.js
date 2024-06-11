@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import PresalePage from './app/main/presale/PresalePage'
 

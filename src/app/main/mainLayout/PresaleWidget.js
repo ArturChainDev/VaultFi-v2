@@ -2,17 +2,18 @@ import React from 'react';
 export const PressaleWidget = () => {
   return (
     <div className="flex flex-col gap-5 md:gap-8">
-      <div className="flex flex-col gap-2.5 md:flex-row md:items-center">
-        <h1 className="text-center text-3xl font-extrabold italic uppercase md:text-6xl md:text-left md:w-1/2">
-          Pioneering the New
-          Era of DeFi 3.0.
+      <div className="flex flex-col gap-2.5  md:flex-row md:items-start">
+        <h1 className="text-center text-3xl font-extrabold italic uppercase md:text-6xl md:text-left md:w-3/5">
+          Pioneering the New Era of DeFi 3.0.
         </h1>
-        <p className="text-center text-sm md:text-left md:text-xl md:w-1/2 font-light">
+        <p className="text-center text-sm md:text-left md:text-xl md:w-2/5 font-light">
           <span className="text-white/60">
-            VaultFinance is revolutionizing DeFi (Decentralized Finance), with APY backed by revenue-generating businesses.
+            VaultFinance is revolutionizing DeFi (Decentralized Finance), with
+            APY backed by revenue-generating businesses.
           </span>
           <span className="font-semibold">
-            VaultFi has undergone 2 security audits, 1 economic audit, and is led by a doxxed team.
+            &nbsp; VaultFi has undergone 2 security audits, 1 economic audit,
+            and is led by a doxxed team.
           </span>
         </p>
       </div>
@@ -23,26 +24,26 @@ export const PressaleWidget = () => {
               <div className="bg-[#080531] rounded-2xl" id="presale-form">
                 <div className="p-5 md:p-8 space-y-4">
                   <div className="space-y-3">
-                    <p className="font-bold uppercase text-center italic text-[48px]/[55px] w-full truncate bg-gradient-to-r from-[#FFD600] to-[#FFEC86]/90 text-transparent bg-clip-text">
-                      $1,729,437
+                    <p className="font-bold uppercase text-fire text-center italic text-[48px]/[55px] w-full truncate bg-gradient-to-r from-[#FFD600] to-[#FFEC86]/90 text-transparent bg-clip-text">
+                      $547,140
                     </p>
                     <div className="space-y-1">
                       <p className="text-xs text-white/50">
-                        96.08% of minimum goal raised
+                        91.19% of minimum goal raised
                       </p>
                       <div className="relative h-2 overflow-hidden rounded-xl bg-white/20">
                         <div
                           className="absolute inset-0 h-full bg-gradient-to-r from-[#FFD600] to-[#FFEC86]/90"
-                          style={{ width: '96.0798%' }}
+                          style={{ width: '91.19%' }}
                         ></div>
                       </div>
                       <p className="text-xs text-right text-white/50">
-                        $1,200,000
+                        $600,000
                       </p>
                     </div>
                     <div className="flex flex-col gap-2">
                       <p className="text-xl font-semibold text-center">
-                        2623 Participants
+                        🔥 2631 Visitors in the last 24h
                       </p>
                       <p className="text-sm text-center text-white/50">
                         Listing price = $0.001
@@ -107,7 +108,8 @@ export const PressaleWidget = () => {
                         htmlFor="from-token"
                         className="text-[11px] font-semibold uppercase text-white/50"
                       >
-                        Amount in <span className="text-primary">USDC</span> you pay
+                        Amount in <span className="text-primary">USDC</span> you
+                        pay
                       </label>
                       <div className="relative">
                         <input
@@ -127,15 +129,13 @@ export const PressaleWidget = () => {
                     <div className="space-y-2">
                       <label
                         htmlFor="from-token"
-                        className="flex flex-wrap text-[11px] font-semibold uppercase text-white/50"
+                        className="flex flex-wrap items-center text-[11px] font-semibold uppercase text-white/50"
                       >
-                        VaultFi token amount you receive
+                        <p className="my-auto">VaultFi token amount you receive</p>
                         <span
                           className="flex gap-1 ml-1"
                           style={{ color: 'rgb(253, 87, 247)' }}
                         >
-                          <span>+</span>
-                          <span>Rare NFT</span>
                           <svg
                             width="16"
                             height="17"
@@ -149,7 +149,6 @@ export const PressaleWidget = () => {
                               fill="white"
                             ></path>
                           </svg>
-                          <span className="text-white/50"> (Sold Out)</span>
                         </span>
                       </label>
                       <div className="relative">
@@ -160,8 +159,8 @@ export const PressaleWidget = () => {
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-5">
                           <img
-                            src="/images/tokens/hplt.svg"
-                            alt="HPLT"
+                            src="/assets/images/tokens/token.svg"
+                            alt="token"
                             className="object-contain w-6 h-6"
                           />
                         </div>
@@ -170,10 +169,16 @@ export const PressaleWidget = () => {
                   </div>
                   <div className="flex flex-col justify-center items-center">
                     <div className="flex w-6 mb-1.5">
-                      <img src="/assets/big-coin-DFHagV5H.png" className="h-full" />
+                      <img
+                        src="/assets/images/tokens/token.svg"
+                        alt="token"
+                        className="h-full"
+                      />
                     </div>
                     <div className="text-center text-xs text-white/50">
-                      In order to buy VaultFi tokens, please confirm the transaction in your wallet. You may need to check the wallet app if you're on mobile.
+                      In order to buy VaultFi tokens, please confirm the
+                      transaction in your wallet. You may need to check the
+                      wallet app if you're on mobile.
                     </div>
                   </div>
                   <button className="flex items-center justify-center w-full px-3 py-5 font-semibold text-white uppercase rounded-lg bg-primary hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed">
@@ -185,15 +190,12 @@ export const PressaleWidget = () => {
             <div className="flex md:w-2/3">
               <div className="flex flex-col items-center md:gap-10 w-full p-0 md:pb-14 md:p-7 bg-[#080531] rounded-2xl">
                 <div className="flex w-full p-3 md:p-0 no-scrollbar">
-                  <div className="flex w-[540px] md:w-full flex-shrink-0 py-1">
+                  <div className="flex w-fit md:w-full flex-shrink-0 py-1">
                     <div id="chart" className="flex relative">
                       <img
-                        src="/assets/images/charts/VaultFi Presale Site - Graphic.png"
+                        src="/assets/images/charts/VaultFiChart.png"
                         className="w-full h-auto"
                       />
-                      <div className="absolute left-[10%] bottom-[6%] right-[-0.2%] top-0 flex h-full">
-                        <img/>
-                      </div>
                     </div>
                     <div
                       id="tooltip"

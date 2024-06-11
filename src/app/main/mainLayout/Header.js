@@ -15,7 +15,7 @@ export const Header = () => {
           className="router-link-active router-link-exact-active flex items-center gap-1.5 md:gap-2"
         ></a>
         <div className="hidden md:flex">
-          <div className="text-xl flex items-center md:gap-10 gap-4">
+          <div className="text-md flex items-center md:gap-10 gap-4">
             <a
               href="/#roadmap"
               className="text-gold hover:text-white whitespace-nowrap px-3 py-1 bg-white/20 rounded-md"

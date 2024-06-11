@@ -1,9 +1,9 @@
 import React from 'react'
 export const KeyMetrics = () => {
     return (
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-4 my-28 md:px-10">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-4 my-28">
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <p className="text-sm text-center font-medium text-white/50">
+                <p className="text-md text-center font-medium text-white/50">
                     Blockchain Network
                 </p>
                 <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -11,7 +11,7 @@ export const KeyMetrics = () => {
                 </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <p className="text-sm text-center font-medium text-white/50">
+                <p className="text-md text-center font-medium text-white/50">
                     Total Supply
                 </p>
                 <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -19,7 +19,7 @@ export const KeyMetrics = () => {
                 </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <p className="text-sm text-center font-medium text-white/50">
+                <p className="text-md text-center font-medium text-white/50">
                     Pre-sale Price
                 </p>
                 <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -27,7 +27,7 @@ export const KeyMetrics = () => {
                 </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <p className="text-sm text-center font-medium text-white/50">
+                <p className="text-md text-center font-medium text-white/50">
                     Launch Price
                 </p>
                 <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -35,7 +35,7 @@ export const KeyMetrics = () => {
                 </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <p className="text-sm text-center font-medium text-white/50">
+                <p className="text-md text-center font-medium text-white/50">
                     Initial Market Cap
                 </p>
                 <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -43,7 +43,7 @@ export const KeyMetrics = () => {
                 </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <p className="text-sm text-center font-medium text-white/50">
+                <p className="text-md text-center font-medium text-white/50">
                     Project Valuation
                 </p>
                 <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -51,7 +51,7 @@ export const KeyMetrics = () => {
                 </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <p className="text-sm text-center font-medium text-white/50">
+                <p className="text-md text-center font-medium text-white/50">
                     Hard Cap
                 </p>
                 <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -59,7 +59,7 @@ export const KeyMetrics = () => {
                 </h3>
             </div>
             <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-                <p className="text-sm text-center font-medium text-white/50">
+                <p className="text-md text-center font-medium text-white/50">
                     Token Launch
                 </p>
                 <h3 className="mb-2.5 text-xl text-center font-semibold">
