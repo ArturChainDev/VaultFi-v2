@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+:root {
+  --scroll-duration: 5s; /* Adjust this value to change the scroll speed */
+}
+
 body {
   background-color: #000550;
   color: white;

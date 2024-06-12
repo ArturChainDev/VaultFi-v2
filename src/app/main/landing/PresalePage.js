@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {lazy} from 'react';
 import {
   Header,
-  PressaleWidget,
+  PresaleWidget,
   SecureWidget,
   KeyMetrics,
   SummaryWidget,
@@ -20,7 +20,7 @@ const PresalePage = () => {
     <div className="relative flex flex-col gap-5 md:gap-8 p-3 md:px-18 md:p-7 md:pt-2 max-w-[1300px] mx-auto !pb-28">
       <Header />
       <div >
-        <PressaleWidget />
+        <PresaleWidget />
         <SecureWidget />
         <KeyMetrics />
         <SummaryWidget />

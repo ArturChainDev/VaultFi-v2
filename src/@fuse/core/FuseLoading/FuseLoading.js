@@ -15,25 +15,35 @@ function FuseLoading(props) {
   return (
     <div
       className={clsx(
-        'flex flex-1 flex-col items-center justify-center p-24',
+        'flex flex-1 flex-col items-center justify-center p-24 my-auto',
         !showLoading && 'hidden'
       )}
     >
-      <Typography className="text-13 sm:text-20 font-medium -mb-16" color="text.secondary">
-        Loading
-      </Typography>
-      <Box
-        id="spinner"
-        sx={{
-          '& > div': {
-            backgroundColor: 'palette.secondary.main',
-          },
-        }}
-      >
-        <div className="bounce1" />
-        <div className="bounce2" />
-        <div className="bounce3" />
-      </Box>
+      <div className='flex flex-col items-center justify-center p-24 my-auto'>
+        <div className='flex flex-col py-10'>
+          <img
+            src="/assets/images/tokens/token.svg"
+            alt="token"
+            className="h-20"
+          />
+          <p className="text-5xl sm:text-20 font-medium -mb-16" color="text.secondary">
+            Loading
+          </p>
+        </div>
+        <div
+          className='flex'
+          id="spinner"
+          sx={{
+            '& > div': {
+              backgroundColor: 'palette.secondary.main',
+            },
+          }}
+        >
+          <div className="bounce1" />
+          <div className="bounce2" />
+          <div className="bounce3" />
+        </div>
+      </div>
     </div>
   );
 }

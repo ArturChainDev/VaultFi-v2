@@ -13,7 +13,7 @@ export const QuestionWidget = () => {
     }
   };
   return (
-    <div className="md:grid md:grid-cols-2 gap-10 text-white/90">
+    <div className="md:grid md:grid-cols-2 gap-10 text-white/90" id="faq">
       <div className="col-lg-5">
         <div className="flex flex-col">
           <div className="flex flex-col items-start mt-3">

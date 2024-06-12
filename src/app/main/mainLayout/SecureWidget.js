@@ -7,7 +7,7 @@ export const SecureWidget = () => {
       </h2>
       <div className="flex flex-wrap gap-3 md:gap-5 md:flex-nowrap">
         <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
-          <img src="https://www.battlegroundps.org/wp-content/uploads/2021/02/Clean-Audit.jpg" className="mb-5 w-28 md:w-52" />
+          <img src="assets/images/logo/audit-image.png" className="mb-5 w-32 md:w-28" />
           <h3 className="mb-2.5 text-xl text-center font-semibold">
             Economic Audit
           </h3>
@@ -20,7 +20,7 @@ export const SecureWidget = () => {
           target="_blank"
           className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7 w-full"
         >
-          <img src="https://www.fintechfutures.com/files/2021/08/certik.png" className="mb-5 w-16 md:w-28" />
+          <img src="https://www.fintechfutures.com/files/2021/08/certik.png" className="mb-5 w-32 md:w-28" />
           <h3 className="mb-2.5 text-xl text-center font-semibold">
             Audited by Certik
           </h3>
@@ -33,7 +33,7 @@ export const SecureWidget = () => {
           target="_blank"
           className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7 w-full"
         >
-          <img src="assets/images/logo/perckshield.png" className="md:my-10 my-5 w-48 md:w-52" />
+          <img src="assets/images/logo/perckshield.png" className="md:my-8 my-5 w-72 md:w-64" />
           <h3 className="mb-2.5 text-xl text-center font-semibold">
             Audited by PeckShield
           </h3>

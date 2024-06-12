@@ -27,25 +27,25 @@ export const Header = () => {
         <div className="hidden md:flex">
           <div className="text-md flex items-center md:gap-8 gap-4">
             <a
-              href="/#roadmap"
+              href="presale/#roadmap"
               className="text-gold hover:text-white whitespace-nowrap px-3 py-1 bg-white/20 rounded-md"
             >
               Growth Potential
             </a>
             <a
-              href="/#tokenomics"
+              href="presale/#tokenomics"
               className="text-white/50 hover:text-white whitespace-nowrap"
             >
               Tokenomics
             </a>
             <a
-              href="/#how-to-buy"
+              href="presale/#how-to-buy"
               className="text-white/50 hover:text-white whitespace-nowrap"
             >
               How to Buy
             </a>
             <a
-              href="/#faq"
+              href="presale/#faq"
               className="text-white/50 hover:text-white whitespace-nowrap"
             >
               FAQ

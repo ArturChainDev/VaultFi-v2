@@ -1,10 +1,12 @@
-import React from 'react';
+import Paper from "@mui/material/Paper";
 import { lighten, useTheme } from "@mui/material/styles";
 
 import { useLocation } from "react-router-dom";
 import { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateStatus } from "src/app/store/updateFlagSlice";
+
+import FuseCountdown from "@fuse/core/FuseCountdown";
 
 import axios from "axios";
 import {
@@ -30,10 +32,12 @@ import {
   useChainModal,
 } from '@rainbow-me/rainbowkit';
 
-export const PressaleWidget = () => {
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
+export function PresaleWidget(props) {
   const theme = useTheme();
   const query = useQuery();
 
@@ -46,6 +50,7 @@ export const PressaleWidget = () => {
   const TOTAL_MAX_ALLOCATION = 1500000000;
   const TOKEN_PRICE = 0.0008;
   const STEP = 100000; //10000
+  const ethPriceInUsdc = 3680; // ETH price in USDC
 
   const { address, isConnected } = useAccount();
 
@@ -92,7 +97,8 @@ export const PressaleWidget = () => {
         }
         await fetchChainStatus();
       } else {
-        // await fetchRoundStatus();
+        try { await fetchRoundStatus(); }
+        catch (error) { console.log(error); }
         console.log("fetch")
       }
     };
@@ -322,6 +328,14 @@ export const PressaleWidget = () => {
 
   const handleInputTokens = (event) => {
     const value = event.target.value;
+    if (tokenType === 3) {
+      setInputTokens(value);
+      const usdc = calculateUSDC(value)
+      const usdcInSmallestUnit = toBigNum(usdc, 6);
+      const ethAmount = (usdcInSmallestUnit).div(toBigNum(ethPriceInUsdc, 6));
+      setUsdcForTokens(ethAmount);
+      return;
+    }
     if (
       /^\d*$/.test(value) &&
       (parseInt(value, 10) >= MIN_TOKEN_VALUE ||
@@ -331,6 +345,20 @@ export const PressaleWidget = () => {
       setUsdcForTokens(calculateUSDC(value));
     }
   };
+
+  const handleInputPrice = (event) => {
+
+    const value = event.target.value;
+    setUsdcForTokens(value);
+    if (value === "") {
+      setInputTokens(0);
+    } else if (tokenType === 3) {
+      const usdc = ethPriceInUsdc * value;
+      setInputTokens(toBigNum(usdc, 4).div(toBigNum(TOKEN_PRICE, 4)))
+    } else {
+      setInputTokens(toBigNum(value, 4).div(toBigNum(TOKEN_PRICE, 4)))
+    }
+  }
 
   const handleDepositUSDC = async () => {
     if (!isConnected) {
@@ -524,8 +552,6 @@ export const PressaleWidget = () => {
     try {
       let tx;
 
-      const ethPriceInUsdc = 3680; // ETH price in USDC
-
       // Convert USDC to smallest unit (6 decimals)
       const usdcInSmallestUnit = toBigNum(usdc, 6);
 
@@ -582,6 +608,7 @@ export const PressaleWidget = () => {
     setLoading(false);
   };
 
+
   const calculateRateOfProgressBar = () => {
     let rate = ((totalTokensRequested / TOTAL_MAX_ALLOCATION) * 100).toFixed(4);
     return rate;
@@ -589,6 +616,44 @@ export const PressaleWidget = () => {
 
   const calculateUSDC = (tokens) => {
     return (TOKEN_PRICE * tokens).toFixed(2);
+  };
+
+  const switchMoney = (tokenType) => {
+    if (tokenType === 1) {
+      return "USDC";
+    } else if (tokenType === 2) {
+      return "USDT";
+    } else if (tokenType === 3) {
+      return "ETH";
+    }
+  };
+
+  <img
+    src="assets/images/tokens/usdc.webp"
+    alt="USDC"
+    className="object-contain w-6 h-6"
+  />
+
+  const switchImage = (tokenType) => {
+    if (tokenType === 1) {
+      return <img
+        src="assets/images/tokens/usdc.webp"
+        alt="USDC"
+        className="object-contain w-6 h-6"
+      />;
+    } else if (tokenType === 2) {
+      return <img
+        src="assets/images/tokens/usdt.svg"
+        alt="USDC"
+        className="object-contain w-6 h-6"
+      />;
+    } else if (tokenType === 3) {
+      return <img
+        src="assets/images/tokens/eth.svg"
+        alt="USDC"
+        className="object-contain w-6 h-6"
+      />;
+    }
   };
 
   return (
@@ -620,12 +685,12 @@ export const PressaleWidget = () => {
                     </p>
                     <div className="space-y-1">
                       <p className="text-xs text-white/50">
-                        91.19% of minimum goal raised
+                        {calculateRateOfProgressBar()}% of minimum goal raised
                       </p>
                       <div className="relative h-2 overflow-hidden rounded-xl bg-white/20">
                         <div
                           className="absolute inset-0 h-full bg-gradient-to-r from-[#FFD600] to-[#FFEC86]/90"
-                          style={{ width: '91.19%' }}
+                          style={{ width: `${calculateRateOfProgressBar()}%` }}
                         ></div>
                       </div>
                       <p className="text-xs text-right text-white/50">
@@ -651,7 +716,9 @@ export const PressaleWidget = () => {
                     <div className="flex flex-col w-full gap-1.5">
                       <div className="flex items-center gap-4">
                         <div className="grid grid-cols-3 gap-0.5 w-full rounded-xl overflow-hidden">
-                          <button className="p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 bg-white/10">
+                          <button
+                            onClick={() => setTokenType(Number(3))}
+                            className={`${tokenType === 3 ? 'bg-primary' : 'bg-white/10'} " p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75"`}>
                             <div className="relative flex">
                               <img
                                 src="assets/images/tokens/eth.svg"
@@ -661,7 +728,9 @@ export const PressaleWidget = () => {
                             </div>
                             ETH
                           </button>
-                          <button className="p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 bg-white/10">
+                          <button
+                            onClick={() => setTokenType(Number(2))}
+                            className={`${tokenType === 2 ? 'bg-primary' : 'bg-white/10'} " p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75"`}>
                             <div className="relative flex">
                               <img
                                 src="assets/images/tokens/usdt.svg"
@@ -675,7 +744,9 @@ export const PressaleWidget = () => {
                             </div>
                             USDT
                           </button>
-                          <button className="p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 bg-primary">
+                          <button
+                            onClick={() => setTokenType(Number(1))}
+                            className={`${tokenType === 1 ? 'bg-primary' : 'bg-white/10'} " p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75"`}>
                             <div className="relative flex">
                               <img
                                 src="assets/images/tokens/usdc.webp"
@@ -699,21 +770,26 @@ export const PressaleWidget = () => {
                         htmlFor="from-token"
                         className="text-[11px] font-semibold uppercase text-white/50"
                       >
-                        Amount in <span className="text-primary">USDC</span> you
+                        Amount in <span className="text-primary uppercase">{switchMoney(tokenType)}
+                        </span> you
                         pay
                       </label>
                       <div className="relative">
                         <input
+                          value={usdcForTokens}
+                          onChange={handleInputPrice}
                           type="number"
                           inputMode="numeric"
                           className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+                          // disabled={
+                          //   !isConnected ||
+                          //   (!isOGRound && !isPublicRound) ||
+                          //   (isOGRound && !isOGRoundWhitelisted) ||
+                          //   isEnded
+                          // }
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-5">
-                          <img
-                            src="assets/images/tokens/usdc.webp"
-                            alt="USDC"
-                            className="object-contain w-6 h-6"
-                          />
+                          {switchImage(tokenType)}
                         </div>
                       </div>
                     </div>
@@ -747,12 +823,12 @@ export const PressaleWidget = () => {
                           label={"Token amount"}
                           value={inputTokens}
                           onChange={handleInputTokens}
-                          disabled={
-                            !isConnected ||
-                            (!isOGRound && !isPublicRound) ||
-                            (isOGRound && !isOGRoundWhitelisted) ||
-                            isEnded
-                          }
+                          // disabled={
+                          //   !isConnected ||
+                          //   (!isOGRound && !isPublicRound) ||
+                          //   (isOGRound && !isOGRoundWhitelisted) ||
+                          //   isEnded
+                          // }
                           type="number"
                           inputMode="numeric"
                           className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
@@ -810,7 +886,11 @@ export const PressaleWidget = () => {
                     <div id="chart" className="flex relative">
                       <img
                         src="/assets/images/charts/VaultFiChart.png"
-                        className="w-full h-auto"
+                        className="hidden md:flex w-full h-auto"
+                      />
+                      <img
+                        src="/assets/images/charts/VaultFiChart-mobile.png"
+                        className="flex md:hidden w-full h-auto"
                       />
                     </div>
                     <div
@@ -839,39 +919,6 @@ export const PressaleWidget = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="flex items-center md:justify-center gap-3 md:gap-7 w-full p-3 md:p-0">
-                  <div className="flex items-center gap-1 md:gap-3">
-                    <div className="h-1.5 w-1.5 md:h-3 md:w-3 rounded-full bg-[#FF00FB]"></div>
-                    <div className="text-[10px] md:text-sm font-medium">Users</div>
-                  </div>
-                  <div className="flex items-center gap-1 md:gap-3">
-                    <div className="h-1.5 w-1.5 md:h-3 md:w-3 rounded-full bg-[#FFC700]"></div>
-                    <div className="text-[10px] md:text-sm font-medium">
-                      Revenue
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1 md:gap-3">
-                    <div className="h-1.5 w-1.5 md:h-3 md:w-3 rounded-full bg-[#8554FB]"></div>
-                    <div className="text-[10px] md:text-sm font-medium">
-                      Boxes opened
-                    </div>
-                  </div>
-                  <div className="flex md:hidden items-center gap-1 ml-auto">
-                    <div className="text-[10px] md:text-sm font-medium">Scroll</div>
-                    <svg
-                      width="13"
-                      height="9"
-                      viewBox="0 0 13 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12.8536 4.85355C13.0488 4.65829 13.0488 4.34171 12.8536 4.14645L9.67157 0.964466C9.47631 0.769204 9.15973 0.769204 8.96447 0.964466C8.7692 1.15973 8.7692 1.47631 8.96447 1.67157L11.7929 4.5L8.96447 7.32843C8.7692 7.52369 8.7692 7.84027 8.96447 8.03553C9.15973 8.2308 9.47631 8.2308 9.67157 8.03553L12.8536 4.85355ZM0 5H12.5V4H0V5Z"
-                        fill="white"
-                      ></path>
-                    </svg>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>

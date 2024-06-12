@@ -1,5 +1,5 @@
 import { Header } from './Header';
-import { PressaleWidget } from './PresaleWidget';
+import { PresaleWidget } from './PresaleWidget';
 import { SecureWidget } from './SecureWidget'
 import { KeyMetrics } from './KeyMetrics'
 import { SummaryWidget } from './SumarryWidget';
@@ -14,7 +14,7 @@ import { TeammateWidget } from './TeammateWidget';
 import { QuestionWidget } from './QuestionWidget'
 export {
     Header,
-    PressaleWidget,
+    PresaleWidget,
     SecureWidget,
     KeyMetrics,
     SummaryWidget,
