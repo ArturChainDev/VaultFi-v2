@@ -1,7 +1,7 @@
 import React from 'react';
-const SubBoard = ({ number, title, content, children }) => {
+const SubBoard = ({ number, title, content, children, url }) => {
   return (
-    <div className="p-3">
+    <div className="p-3 md:col-span-3">
       <div
         className={`${
           number === 6 ? 'bg-primary' : 'bg-[#332A6A]'
@@ -10,15 +10,18 @@ const SubBoard = ({ number, title, content, children }) => {
         <div
           className={`${
             number === 6 ? 'bg-[#332A6A]' : 'bg-primary'
-          } w-6 rounded-full`}
+          } flex items-center justify-center md:w-6 md:h-6 md:text-lg w-12 h-12 text-xl rounded-full`}
         >
           {number}
         </div>
         <div>
           <h3 className="mb-2.5 text-xl text-center font-semibold">{title}</h3>
-          <p className="text-sm text-center font-medium text-white/50">
+          <p className={`${
+            number === 6 ? 'text-[#000550]' : 'text-white/70'
+          } text-2xl md:text-sm text-center font-medium`}>
             {content}
           </p>
+          <a href='#' className="underline text-primary">{url}</a>
         </div>
       </div>
       {children}
@@ -31,28 +34,36 @@ export const GuideWidget = () => {
       <h3 class="text-center text-3xl font-extrabold italic uppercase md:text-5xl">
         HOW TO BUY VAULTFI GUIDE
       </h3>
-      <div className="hidden md:grid items-stretch grid-cols-1 md:grid-cols-3 my-28 ">
+      <div className="hidden md:grid items-stretch md:grid-cols-12 my-28 ">
         <SubBoard
-          content={'Visit our website: Presale.vault-finance.com'}
+          content={'Visit our website:'}
           number={1}
+          url={"Presale.vault-finance.com"}
         />
+        <div></div>
         <SubBoard content={'Enter the amount you want to buy'} number={4} />
+        <img src='assets/images/arrow.png' width={60} className='m-auto'/>
         <SubBoard
           content={
             'Confirm the transaction on your wallet, make sure you have enough ETH to cover gas fee'
           }
           number={5}
         />
+        <img src='assets/images/arrow.png' width={60} className='m-auto rotate-90 col-start-2 col-end-3'/>
+        <img src='assets/images/arrow.png' width={60} className='m-auto -rotate-90 col-start-6 col-end-7'/>
+        <img src='assets/images/arrow.png' width={60} className='m-auto rotate-90 col-start-10 col-end-11'/>
         <SubBoard content={'Connect your wallet'} number={2} />
+        <img src='assets/images/arrow.png' width={60} className='m-auto'/>
         <SubBoard
           content={'Choose your desired currency to buy with (ETH, USDC, USDT)'}
           number={3}
         />
+        <div></div>
         <SubBoard
           content={'Congratulations, you own VaultFi tokens now!'}
           number={6}
         ></SubBoard>
-        <p class="text-sm text-center font-medium text-white/50 my-3 col-end-4 col-start-3">
+        <p class="text-sm text-center font-medium text-white/70 my-3 col-end-12 col-start-9">
           Note: For USDT & USDC, you need to first approve and then send, which
           means there are 2 transactions that you need to approve.
         </p>
@@ -62,19 +73,23 @@ export const GuideWidget = () => {
           content={'Visit our website: Presale.vault-finance.com'}
           number={1}
         />
+        <img src='assets/images/arrow.png' width={60} className='rotate-90 m-auto'/>
         <SubBoard content={'Connect your wallet'} number={2} />
-
+        <img src='assets/images/arrow.png' width={60} className='rotate-90 m-auto'/>
         <SubBoard
           content={'Choose your desired currency to buy with (ETH, USDC, USDT)'}
           number={3}
         />
+        <img src='assets/images/arrow.png' width={60} className='rotate-90 m-auto'/>
         <SubBoard content={'Enter the amount you want to buy'} number={4} />
+        <img src='assets/images/arrow.png' width={60} className='rotate-90 m-auto'/>
         <SubBoard
           content={
             'Confirm the transaction on your wallet, make sure you have enough ETH to cover gas fee'
           }
           number={5}
         />
+        <img src='assets/images/arrow.png' width={60} className='rotate-90 m-auto'/>
         <SubBoard
           content={'Congratulations, you own VaultFi tokens now!'}
           number={6}

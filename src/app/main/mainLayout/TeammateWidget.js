@@ -1,38 +1,39 @@
 import React from 'react';
 export const TeammateWidget = () => {
   return (
-    <div class="p-10 md:flex md:flex-col">
-      <div class="">
-        <h3 class="text-center text-xl text-gold font-extrabold uppercase">
-          VAULTFI TOKENOMICS
+    <div class="p-3 md:p-10 md:flex md:flex-col">
+      <div class="flex flex-col md:items-start items-center">
+        <h3 class="md:text-left text-center text-xl text-primary font-semibold uppercase pb-10">
+          MEET THE TEAM BEHIND VAULTFINANCE
         </h3>
-        <h2 class="mb-4 pb-2 text-uppercase text-6xl">
+        <h2 class="md:text-left text-center mb-4 pb-2 text-uppercase text-5xl">
           Read about the team <br />
           behind Pioneering DeFi 3.0
         </h2>
       </div>
-      <div class="md:grid md:grid-cols-2">
-        <div class="col-md-6 col-lg-5 p-10">
-          <div class="flex flex-col items-center">
-            <div class="p-4">
+      <div class="md:grid md:grid-cols-2 py-10 md:gap-10">
+        <div class="col-md-6 col-lg-5">
+          <div class="flex flex-col md:items-start items-center">
+            <div class="p-6">
               <img
-                src="assets/images/avatars/brian-hughes.jpg"
+                src="assets/images/avatars/Matthias-Mazur.png"
                 style={{ borderRadius: '50%' }}
               />
             </div>
-            <h3 class="text-center text-2xl text-gold font-extrabold uppercase">
+            <h3 class="text-center text-4xl text-primary font-black uppercase">
               Matthias Mazur
             </h3>
             <h5 className="py-4 text-center text-xl">
               Co-Founder. Fully doxxed.
             </h5>
-            <p className="text-left text-xl">
+            <p className="md:text-left text-center text-xl">
               Matthias Mazur is serial internet entrepreneur, author investor
               and founder of CoinRock Ventures, that builds and incubates crypto
               and Web3 projects, with 17 years of experience in building,
               acquiring, growing and selling digital businesses.
-            </p><br/>
-            <p className="text-left text-xl">
+            </p>
+            <br />
+            <p className="md:text-left text-center text-xl">
               He has been involved in digital marketing since the early 2000s,
               and has built over a dozen internet-based businesses which have
               collectively generated over $200 million in revenue since retiring
@@ -43,25 +44,26 @@ export const TeammateWidget = () => {
             </p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-5 p-10">
-          <div class="flex flex-col items-center">
-            <div class="p-4">
+        <div class="col-md-6 col-lg-5 md:py-10 py-14">
+          <div class="flex flex-col md:items-start items-center">
+            <div class="px-0 md:px-4">
               <img
-                src="/assets/images/avatars/brian-hughes.jpg"
+                src="/assets/images/avatars/CaiusinabarreL.png"
                 style={{ borderRadius: '50%' }}
               />
             </div>
-            <h3 class="text-center text-2xl text-gold font-extrabold uppercase">
+            <h3 class="text-center text-4xl text-primary font-black uppercase">
               CaiusinabarreL
             </h3>
-            <h5 className=" py-4 text-center text-xl">Co-Founder</h5>
-            <p className="text-left text-xl">
+            <h5 className="py-4 text-center text-xl">Co-Founder</h5>
+            <p className="md:text-left text-center text-xl">
               Caiusinabarrel is a seasoned management consultant whose
               experience at a Big 4 consulting firm spans across commercial due
               diligence, mergers and acquisitions, digital transformation,
               strategic growth, and project management office operations.
-            </p><br/>
-            <p className="text-left text-xl">
+            </p>
+            <br />
+            <p className="md:text-left text-center text-xl">
               With experience in guiding Fortune 500 companies and startups
               alike, he has established himself as a trusted strategist with a
               deep understanding of Web3, portfolio management, quantitative

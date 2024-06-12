@@ -32,7 +32,7 @@ const PresalePage = () => {
         <TokenomicWidget />
         <WhitePaperWidget />
         <TeammateWidget />
-        <QuestionWidget />
+        {/* <QuestionWidget /> */}
       </div>
     </div>
   );

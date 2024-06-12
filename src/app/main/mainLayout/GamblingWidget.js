@@ -11,7 +11,7 @@ export const GamblingWidget = () => {
   return (
     <div>
       <div class="flex flex-col gap-2.5 md:gap-5">
-        <h3 class="text-center text-3xl font-extrabold italic uppercase md:text-6xl">
+        <h3 class="text-center text-3xl font-extrabold italic uppercase md:text-5xl">
           DISRUPTING THE DEFI SECTOR
         </h3>
         <div class="flex overflow-auto no-scrollbar">
@@ -19,31 +19,31 @@ export const GamblingWidget = () => {
             <div class="flex gap-1 md:w-full">
               <div class="w-52 md:w-1/2"></div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
-                <img src="" />
+                <img src="assets/icons/vaultfi.png" width={50}/>
                 <span class="font-medium text-center whitespace-nowrap">
                   VaultFi
                 </span>
               </div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
-                <img src="" />
+                <img src="assets/icons/hex.png" width={50}/>
                 <span class="font-medium text-center whitespace-nowrap">
                   HEX
                 </span>
               </div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
-                <img src="" />
+                <img src="assets/icons/aave-logo.png" width={50}/>
                 <span class="font-medium text-center whitespace-nowrap">
                   AAVE
                 </span>
               </div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
-                <img src="" />
+                <img src="assets/icons/ohm.png" width={50}/>
                 <span class="font-medium text-center whitespace-nowrap">
                   OHM
                 </span>
               </div>
               <div class="flex flex-col items-center justify-center w-28 py-3 px-5 gap-2.5">
-                <img src="" />
+                <img src="assets/icons/time.png" width={50}/>
                 <span class="font-medium text-center whitespace-nowrap">
                   TIME
                 </span>
@@ -154,7 +154,7 @@ export const GamblingWidget = () => {
               <div class="flex items-center justify-center w-52 md:w-1/2 bg-[#332A6A] font-medium rounded-bl-xl">
                 All-time high Market Cap
               </div>
-              <div class="flex items-center justify-center w-28 py-3 px-5 bg-primary">
+              <div class="flex items-center justify-center w-28 overflow-hidden py-3 px-5 bg-primary">
                 Starting at $794,550
               </div>
               <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A]">
@@ -175,16 +175,16 @@ export const GamblingWidget = () => {
                 Growth Potential from VaultFi Starting Market Cap of $794,550
               </div>
               <div class="flex items-center justify-center w-28 py-3 px-5 bg-primary"></div>
-              <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A]">
+              <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A] overflow-hidden">
                 Over 100,000x
               </div>
-              <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A]">
+              <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A] overflow-hidden">
                 Over 10,000x
               </div>
-              <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A]">
+              <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A] overflow-hidden">
                 Over 5,000x
               </div>
-              <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A]">
+              <div class="flex items-center justify-center w-28 py-3 px-5 bg-[#332A6A] overflow-hidden">
                 Over 2,500x
               </div>
             </div>
