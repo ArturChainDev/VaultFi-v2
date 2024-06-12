@@ -1,26 +1,26 @@
 import React from 'react';
 export const TeammateWidget = () => {
   return (
-    <div class="p-3 md:py-10 md:flex md:flex-col">
-      <div class="flex flex-col md:items-start items-center">
-        <h3 class="md:text-left text-center text-xl text-primary font-semibold uppercase pb-10">
+    <div className="p-3 md:py-10 md:flex md:flex-col text-white/90">
+      <div className="flex flex-col md:items-start items-center">
+        <h3 className="md:text-left text-center text-xl text-primary font-semibold uppercase pb-10">
           MEET THE TEAM BEHIND VAULTFINANCE
         </h3>
-        <h2 class="md:text-left text-center mb-4 pb-2 text-uppercase text-5xl">
+        <h2 className="md:text-left text-center mb-4 pb-2 text-uppercase text-5xl">
           Read about the team <br />
           behind Pioneering DeFi 3.0
         </h2>
       </div>
-      <div class="md:grid md:grid-cols-2 py-10 md:gap-10">
-        <div class="col-md-6 col-lg-5">
-          <div class="flex flex-col md:items-start items-center">
-            <div class="p-6">
+      <div className="md:grid md:grid-cols-2 py-10 md:gap-10">
+        <div className="col-md-6 col-lg-5">
+          <div className="flex flex-col md:items-start items-center">
+            <div className="p-6">
               <img
                 src="assets/images/avatars/Matthias-Mazur.png"
                 style={{ borderRadius: '50%' }}
               />
             </div>
-            <h3 class="text-center text-4xl text-primary font-black uppercase">
+            <h3 className="text-center text-4xl text-primary font-black uppercase">
               Matthias Mazur
             </h3>
             <h5 className="py-4 text-center text-xl">
@@ -44,15 +44,15 @@ export const TeammateWidget = () => {
             </p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-5 md:py-10 py-14">
-          <div class="flex flex-col md:items-start items-center">
-            <div class="px-0 md:px-4">
+        <div className="col-md-6 col-lg-5 md:py-10 py-14">
+          <div className="flex flex-col md:items-start items-center">
+            <div className="px-0 md:px-4">
               <img
                 src="/assets/images/avatars/CaiusinabarreL.png"
                 style={{ borderRadius: '50%' }}
               />
             </div>
-            <h3 class="text-center text-4xl text-primary font-black uppercase">
+            <h3 className="text-center text-4xl text-primary font-black uppercase">
               CaiusinabarreL
             </h3>
             <h5 className="py-4 text-center text-xl">Co-Founder</h5>

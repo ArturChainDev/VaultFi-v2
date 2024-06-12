@@ -7,7 +7,7 @@ export const QuestionBoard = ({ children, question, isDropDown, selectNumber, id
     return (
       <div className="my-3">
         <h3
-          class="peer mb-4 pb-2 text-uppercase text-3xl cursor-pointer"
+          className="peer mb-4 pb-2 text-uppercase text-3xl cursor-pointer"
           onClick={onClickHandler}
         >
           {question}

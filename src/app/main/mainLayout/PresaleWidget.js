@@ -114,7 +114,7 @@ export const PressaleWidget = () => {
                       <div className="relative">
                         <input
                           type="number"
-                          inputmode="numeric"
+                          inputMode="numeric"
                           className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-5">
@@ -154,7 +154,7 @@ export const PressaleWidget = () => {
                       <div className="relative">
                         <input
                           type="number"
-                          inputmode="numeric"
+                          inputMode="numeric"
                           className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-5">

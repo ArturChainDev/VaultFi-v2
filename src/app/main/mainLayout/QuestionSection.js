@@ -5,7 +5,6 @@ const AccordionItem = ({ id, title, children, isOpen, toggle, isUsed }) => {
   const contentRef = useRef(null);
   const [contentHeight, setContentHeight] = useState(0);
   useEffect(() => {
-    console.log('ref', contentRef.current.scrollHeight);
     if (!isUsed) {
       setContentHeight(contentRef.current.scrollHeight);
       return;
