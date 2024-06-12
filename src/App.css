@@ -1,4 +1,27 @@
 .App {
   text-align: center;
 }
+/* Custom CSS for animations */
+.accordion-content {
+  animation-delay: 0.2s;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+}
+#arrow{
+  animation-delay: 0.2s;
+  transition: all 0.3s ease-in;
+}
+#telegram-button{
+  animation-delay: 0.1s;
+  transition: all 0.3s ease-in;
+}
 
+.accordion-content-open {
+  /* width: fit-content; */
+  max-height: 500px; 
+  /* adjust as needed */
+
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}

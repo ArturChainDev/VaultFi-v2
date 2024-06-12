@@ -1,7 +1,7 @@
 import React from 'react';
 export const TeammateWidget = () => {
   return (
-    <div class="p-3 md:p-10 md:flex md:flex-col">
+    <div class="p-3 md:py-10 md:flex md:flex-col">
       <div class="flex flex-col md:items-start items-center">
         <h3 class="md:text-left text-center text-xl text-primary font-semibold uppercase pb-10">
           MEET THE TEAM BEHIND VAULTFINANCE
