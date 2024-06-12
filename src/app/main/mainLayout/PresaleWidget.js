@@ -1,5 +1,596 @@
 import React from 'react';
+import { lighten, useTheme } from "@mui/material/styles";
+
+import { useLocation } from "react-router-dom";
+import { memo, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateStatus } from "src/app/store/updateFlagSlice";
+
+import axios from "axios";
+import {
+  getContract,
+  getEtherSigner,
+  fromBigNum,
+  toBigNum,
+} from "src/app/services/web3.service";
+import Alert from "@mui/material/Alert";
+import { useAccount } from "wagmi";
+import { showMessage } from "app/store/fuse/messageSlice";
+import {
+  formatNumberWithCommas,
+  convertSecondsToDate,
+} from "src/app/services/utils.service.js";
+import PresaleData from "src/abis/Presale.json";
+import USDCData from "src/abis/Usdc.json";
+import USDTData from "src/abis/Usdt.json";
+import { ethers } from 'ethers';
+import {
+  useConnectModal,
+  useAccountModal,
+  useChainModal,
+} from '@rainbow-me/rainbowkit';
+
 export const PressaleWidget = () => {
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+  const theme = useTheme();
+  const query = useQuery();
+
+  const updateFlag = useSelector((state) => state.updateFlag.value);
+  const dispatch = useDispatch();
+
+  const ZERO_ADDR = "0x0000000000000000000000000000000000000000";
+  const MIN_TOKEN_VALUE = 100000; //10000
+  const MAX_TOKEN_VALUE = 12500000;
+  const TOTAL_MAX_ALLOCATION = 1500000000;
+  const TOKEN_PRICE = 0.0008;
+  const STEP = 100000; //10000
+
+  const { address, isConnected } = useAccount();
+
+  const [maxAllocation] = useState(MAX_TOKEN_VALUE);
+
+  const [refCode, setRefCode] = useState("");
+  const [referrer, setReferrer] = useState(ZERO_ADDR);
+
+  const [inputTokens, setInputTokens] = useState(1000000);
+  const [usdcForTokens, setUsdcForTokens] = useState(
+    1000000 * TOKEN_PRICE
+  );
+
+  const [isOGRound, setIsOGRound] = useState(false);
+  const [ogRoundTokenLimited, setOGRoundTokenLimited] = useState(0);
+  const [ogRoundEndAt, setOgRoundEndAt] = useState(0);
+  const [isOGRoundWhitelisted, setIsOGRoundWhitelisted] = useState(false);
+
+  const [isPublicRound, setIsPublicRound] = useState(true);
+  const [publicRoundTokenLimited, setPublicRoundTokenLimited] = useState(0);
+  const [publicRoundEndAt, setPublicRoundEndAt] = useState("");
+
+  const [totalTokensRequested, setTotalTokensRequested] = useState(0);
+  const [tokenType, setTokenType] = useState(1); // 1 for USDC, 2 for USDT, 3 for ETH
+  const [tokenRequested, setTokenRequested] = useState(0);
+  const [bonusRequested, setBonusRequested] = useState(0);
+
+  const [loading, setLoading] = useState(false);
+
+  const [isEnded, setIsEnded] = useState(false);
+
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+  const { openChainModal } = useChainModal();
+
+  useEffect(() => {
+    const init = async () => {
+      const refCodeParam = query.get("r");
+      setRefCode(refCodeParam == null ? "" : refCodeParam);
+      console.log("address:", PresaleData.address);
+      if (isConnected) {
+        if (refCodeParam != null) {
+          getReferrerAddr(refCodeParam);
+        }
+        await fetchChainStatus();
+      } else {
+        // await fetchRoundStatus();
+        console.log("fetch")
+      }
+    };
+    init();
+  }, [isConnected, address, updateFlag]);
+
+  const getReferrerAddr = (code) => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "/address/" + code)
+      .then((response) => {
+        if (response.data == "") {
+          dispatch(
+            showMessage({
+              message: "Invalid Referral Code!",
+              variant: "error",
+              anchorOrigin: {
+                vertical: "top",
+                horizontal: "right",
+              },
+            })
+          );
+          return;
+        } else {
+          if (address === response.data.address) {
+            dispatch(
+              showMessage({
+                message:
+                  "Error: You are using your own referral code!\n We will ignore this!",
+                variant: "error",
+                anchorOrigin: {
+                  vertical: "top",
+                  horizontal: "right",
+                },
+              })
+            );
+          } else {
+            setReferrer(response.data.address);
+          }
+        }
+      })
+      .catch((error) => {
+        dispatch(
+          showMessage({
+            message: "DB Connection Error!",
+            variant: "warning",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          })
+        );
+      });
+  };
+
+  const fetchRoundStatus = async () => {
+    // const signer = await getEtherSigner();
+    const presaleContract = await getContract(
+      PresaleData.address,
+      PresaleData.abi
+    );
+
+    // getting OGRound info
+    // let _isOGRound = await presaleContract.checkOGRound();
+    // setIsOGRound(_isOGRound);
+    // if (_isOGRound) {
+    //   let _isOGRoundWhiltelisted = await presaleContract.isOGWhitelisted(
+    //     address
+    //   );
+    //   setIsOGRoundWhitelisted(_isOGRoundWhiltelisted);
+
+    //   let _ogRoundDuration = await presaleContract.getOGRoundDuration();
+    //   let _ogRoundStartedAt = await presaleContract.getOGRoundStartedAt();
+    //   setOgRoundEndAt(
+    //     convertSecondsToDate(
+    //       fromBigNum(_ogRoundStartedAt, 0) + fromBigNum(_ogRoundDuration + 86400, 0)
+    //     )
+    //   );
+
+    //   let _ogRoundTokenLimited = fromBigNum(
+    //     await presaleContract.getOGRoundTokenLimited(address)
+    //   );
+    //   setOGRoundTokenLimited(_ogRoundTokenLimited);
+    // }
+
+    // getting public round info
+    let _isPublicRound = await presaleContract.checkPublicRound();
+    setIsPublicRound(_isPublicRound);
+    let _totalRowTokensRequested;
+    if (_isPublicRound) {
+
+      let _publicRoundStartedAt, _publicRoundDuration, _publicRowRoundTokenLimited;
+      [_publicRoundStartedAt, _publicRoundDuration, _publicRowRoundTokenLimited, _totalRowTokensRequested] = await Promise.all([
+        presaleContract.getPublicRoundStartedAt(),
+        presaleContract.getPublicRoundDuration(),
+        presaleContract.getPublicRoundTokenLimited(),
+        presaleContract.totalTokensRequested(),
+      ])
+      // = await presaleContract.getPublicRoundStartedAt();
+      // let _publicRoundDuration = await presaleContract.getPublicRoundDuration();
+      setPublicRoundEndAt(
+        convertSecondsToDate(
+          fromBigNum(_publicRoundStartedAt, 0) +
+          fromBigNum(_publicRoundDuration - 86400, 0)
+        )
+      );
+      let _publicRoundTokenLimited = fromBigNum(
+        _publicRowRoundTokenLimited
+      );
+
+      // let _publicRoundTokenLimited = fromBigNum(
+      //   await presaleContract.getPublicRoundTokenLimited()
+      // );
+      setPublicRoundTokenLimited(_publicRoundTokenLimited);
+    }
+
+    // let _tokenRequested = fromBigNum(
+    //   await presaleContract.getTokensRequestedOfWallet(address)
+    // );
+    // setTokenRequested(_tokenRequested);
+
+    // let _bonusRequested = fromBigNum(
+    //   await presaleContract.getBonusRequested(address)
+    // );
+    // setBonusRequested(_bonusRequested);
+
+    let _totalTokensRequested = fromBigNum(
+      _totalRowTokensRequested
+    );
+    // let _totalTokensRequested = fromBigNum(
+    //   await presaleContract.totalTokensRequested()
+    // );
+    setTotalTokensRequested(_totalTokensRequested);
+
+    if (_totalTokensRequested >= TOTAL_MAX_ALLOCATION) {
+      setIsEnded(true);
+    }
+  };
+
+  const fetchChainStatus = async () => {
+    // const signer = await getEtherSigner();
+    const presaleContract = await getContract(
+      PresaleData.address,
+      PresaleData.abi
+    );
+
+    // getting OGRound info
+    let _isOGRound = await presaleContract.checkOGRound();
+    setIsOGRound(_isOGRound);
+    if (_isOGRound) {
+      let _isOGRoundWhiltelisted = await presaleContract.isOGWhitelisted(
+        address
+      );
+      setIsOGRoundWhitelisted(_isOGRoundWhiltelisted);
+
+      let _ogRoundDuration = await presaleContract.getOGRoundDuration();
+      let _ogRoundStartedAt = await presaleContract.getOGRoundStartedAt();
+      setOgRoundEndAt(
+        convertSecondsToDate(
+          fromBigNum(_ogRoundStartedAt, 0) + fromBigNum(_ogRoundDuration + 86400, 0)
+        )
+      );
+
+      let _ogRoundTokenLimited = fromBigNum(
+        await presaleContract.getOGRoundTokenLimited(address)
+      );
+      setOGRoundTokenLimited(_ogRoundTokenLimited);
+    }
+
+    // getting public round info
+    let _isPublicRound = await presaleContract.checkPublicRound();
+    setIsPublicRound(_isPublicRound);
+    if (_isPublicRound) {
+      let _publicRoundStartedAt =
+        await presaleContract.getPublicRoundStartedAt();
+      let _publicRoundDuration = await presaleContract.getPublicRoundDuration();
+      setPublicRoundEndAt(
+        convertSecondsToDate(
+          fromBigNum(_publicRoundStartedAt, 0) +
+          fromBigNum(_publicRoundDuration - 86400, 0)
+        )
+      );
+
+      let _publicRoundTokenLimited = fromBigNum(
+        await presaleContract.getPublicRoundTokenLimited()
+      );
+      setPublicRoundTokenLimited(_publicRoundTokenLimited);
+    }
+
+    let _tokenRequested = fromBigNum(
+      await presaleContract.getTokensRequestedOfWallet(address)
+    );
+    setTokenRequested(_tokenRequested);
+
+    let _bonusRequested = fromBigNum(
+      await presaleContract.getBonusRequested(address)
+    );
+    setBonusRequested(_bonusRequested);
+
+    let _totalTokensRequested = fromBigNum(
+      await presaleContract.totalTokensRequested()
+    );
+    setTotalTokensRequested(_totalTokensRequested);
+
+    if (_totalTokensRequested >= TOTAL_MAX_ALLOCATION) {
+      setIsEnded(true);
+    }
+  };
+
+  const incrementValue = () => {
+    const roundedInputTokens = Math.round(inputTokens / STEP) * STEP;
+    const increaseValue = Math.min(roundedInputTokens + STEP, MAX_TOKEN_VALUE);
+    setInputTokens(Math.min(roundedInputTokens + STEP, MAX_TOKEN_VALUE));
+    setUsdcForTokens(
+      Math.min(calculateUSDC(increaseValue), MAX_TOKEN_VALUE * TOKEN_PRICE)
+    );
+  };
+
+  // Handler to decrement the value
+  const decrementValue = () => {
+    const roundedInputTokens = Math.round(inputTokens / STEP) * STEP;
+    const decreaseValue = Math.max(roundedInputTokens - STEP, MIN_TOKEN_VALUE);
+    setInputTokens(Math.max(roundedInputTokens - STEP, MIN_TOKEN_VALUE));
+    setUsdcForTokens(
+      Math.max(calculateUSDC(decreaseValue), MIN_TOKEN_VALUE * TOKEN_PRICE)
+    );
+  };
+
+  const handleInputTokens = (event) => {
+    const value = event.target.value;
+    if (
+      /^\d*$/.test(value) &&
+      (parseInt(value, 10) >= MIN_TOKEN_VALUE ||
+        parseInt(value, 10) <= maxAllocation)
+    ) {
+      setInputTokens(value);
+      setUsdcForTokens(calculateUSDC(value));
+    }
+  };
+
+  const handleDepositUSDC = async () => {
+    if (!isConnected) {
+      return;
+    }
+
+    if (Math.round(inputTokens / STEP) != inputTokens / STEP) {
+      dispatch(
+        showMessage({
+          message: "Error: Token amount should be in increments of 100k!",
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        })
+      );
+      setInputTokens(Math.round(inputTokens / STEP) * STEP);
+      return;
+    }
+    const signer = await getEtherSigner();
+    const presaleContract = await getContract(
+      PresaleData.address,
+      PresaleData.abi,
+      signer
+    );
+
+    let usdc = calculateUSDC(parseInt(inputTokens));
+
+    if (isOGRound) {
+      // ogwhiltelist checking
+      let isWhitelisted = await presaleContract.ogWhitelist(address);
+      if (!isWhitelisted) {
+        dispatch(
+          showMessage({
+            message: "Your are not whitelisted for OG Round",
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          })
+        );
+        return;
+      }
+
+      if (
+        parseInt(inputTokens) + parseInt(tokenRequested) >
+        ogRoundTokenLimited
+      ) {
+        dispatch(
+          showMessage({
+            message: "Error: Pre-sale allocation reached!",
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          })
+        );
+        return;
+      }
+    } else if (isPublicRound) {
+      if (
+        parseInt(inputTokens) + parseInt(tokenRequested) >
+        publicRoundTokenLimited
+      ) {
+        dispatch(
+          showMessage({
+            message: "Error: Pre-sale allocation reached!",
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          })
+        );
+        return;
+      }
+    }
+
+    {/*}
+    if (refCode != null && refCode != "") {
+
+      let isUsedRefCode = await presaleContract.isUsedRefCode(address);
+      if (isUsedRefCode) {
+        dispatch(
+          showMessage({
+            message: "You can only use a ref code on your first purchase!",
+            variant: "error",
+            anchorOrigin: {
+              vertical: "top",
+              horizontal: "right",
+            },
+          })
+        );
+        return;
+      }
+    }
+    */}
+
+    if (totalTokensRequested >= TOTAL_MAX_ALLOCATION) {
+      dispatch(
+        showMessage({
+          message: "Error: Presale sold out",
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        })
+      );
+      return;
+    }
+
+    if (totalTokensRequested + parseInt(inputTokens) > TOTAL_MAX_ALLOCATION) {
+      dispatch(
+        showMessage({
+          message: "Error: Presale allocation is almost sold out. Remaining: " + (TOTAL_MAX_ALLOCATION - totalTokensRequested),
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        })
+      );
+      return;
+    }
+
+    const usdcContract = await getContract(
+      USDCData.address,
+      USDCData.abi,
+      signer
+    );
+
+    const usdtContract = await getContract(
+      USDTData.address,
+      USDTData.abi,
+      signer
+    );
+
+    setLoading(true);
+
+    try {
+      if (tokenType === 1) {
+        // Check allowance for USDC
+        let allowance = fromBigNum(
+          await usdcContract.allowance(address, PresaleData.address),
+          6
+        );
+
+        if (allowance < usdc) {
+          let tx = await usdcContract.approve(
+            PresaleData.address,
+            toBigNum(usdc, 6)
+          );
+          await tx.wait();
+        }
+      } else if (tokenType === 2) {
+        // Check allowance for USDT
+        let allowance = fromBigNum(
+          await usdtContract.allowance(address, PresaleData.address),
+          6
+        );
+
+        if (allowance < usdc) {
+          let tx = await usdtContract.approve(
+            PresaleData.address,
+            toBigNum(usdc, 6)
+          );
+          await tx.wait();
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      dispatch(
+        showMessage({
+          message: `${tokenType === 1 ? 'USDC' : 'USDT'} Approve Transaction Error`,
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        })
+      );
+      setLoading(false);
+      return; // Exit the function if there's an approval error
+    }
+
+    // Proceed with deposit based on the token type
+    try {
+      let tx;
+
+      const ethPriceInUsdc = 3680; // ETH price in USDC
+
+      // Convert USDC to smallest unit (6 decimals)
+      const usdcInSmallestUnit = toBigNum(usdc, 6);
+
+      // Calculate ETH amount (18 decimals)
+      const ethAmount = (usdcInSmallestUnit.mul(ethers.BigNumber.from(10).pow(18))).div(toBigNum(ethPriceInUsdc, 6));
+
+
+      if (tokenType === 1 || tokenType === 2) {
+        // Deposit USDC or USDT
+        tx = await presaleContract.deposit(
+          toBigNum(usdc, 6),
+          referrer,
+          refCode,
+          tokenType
+        );
+      } else if (tokenType === 3) {
+        // Deposit ETH
+        console.log(toBigNum(usdc / 3680, 18));
+        console.log(usdc);
+        tx = await presaleContract.deposit(
+          toBigNum(usdc, 6), // Amount in USDC for token calculation
+          referrer,
+          refCode,
+          tokenType,
+          { value: ethAmount }
+        );
+      }
+      await tx.wait();
+      dispatch(
+        showMessage({
+          message: `You deposited ${tokenType === 1 ? 'USDC' : tokenType === 2 ? 'USDT' : 'ETH'} successfully!`,
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        })
+      );
+      dispatch(updateStatus());
+    } catch (err) {
+      console.log(err);
+      dispatch(
+        showMessage({
+          message: `Deposit ${tokenType === 1 ? 'USDC' : tokenType === 2 ? 'USDT' : 'ETH'} Transaction Error`,
+          variant: "error",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right",
+          },
+        })
+      );
+      setLoading(false);
+    }
+    setLoading(false);
+  };
+
+  const calculateRateOfProgressBar = () => {
+    let rate = ((totalTokensRequested / TOTAL_MAX_ALLOCATION) * 100).toFixed(4);
+    return rate;
+  };
+
+  const calculateUSDC = (tokens) => {
+    return (TOKEN_PRICE * tokens).toFixed(2);
+  };
+
   return (
     <div className="flex flex-col gap-5 md:gap-8">
       <div className="flex flex-col gap-2.5  md:flex-row md:items-start">
@@ -24,7 +615,7 @@ export const PressaleWidget = () => {
               <div className="bg-[#080531] rounded-2xl" id="presale-form">
                 <div className="p-5 md:p-8 space-y-4">
                   <div className="space-y-3">
-                    <p className="font-bold uppercase text-fire text-center italic text-[48px]/[55px] w-full truncate bg-gradient-to-r from-[#FFD600] to-[#FFEC86]/90 text-transparent bg-clip-text">
+                    <p className="font-bold uppercase text-fire text-center italic text-[55px] w-full truncate bg-gradient-to-r from-[#FFD600] to-[#FFEC86]/90 bg-clip-text">
                       $547,140
                     </p>
                     <div className="space-y-1">
@@ -153,6 +744,15 @@ export const PressaleWidget = () => {
                       </label>
                       <div className="relative">
                         <input
+                          label={"Token amount"}
+                          value={inputTokens}
+                          onChange={handleInputTokens}
+                          disabled={
+                            !isConnected ||
+                            (!isOGRound && !isPublicRound) ||
+                            (isOGRound && !isOGRoundWhitelisted) ||
+                            isEnded
+                          }
                           type="number"
                           inputMode="numeric"
                           className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
@@ -181,9 +781,25 @@ export const PressaleWidget = () => {
                       wallet app if you're on mobile.
                     </div>
                   </div>
-                  <button className="flex items-center justify-center w-full px-3 py-5 font-semibold text-white uppercase rounded-lg bg-primary hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed">
-                    <span className="">Connect Wallet</span>
-                  </button>
+                  {!isConnected ?
+                    <button onClick={openConnectModal}
+                      className="flex items-center justify-center w-full px-3 py-5 font-semibold text-white uppercase rounded-lg bg-primary hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <span className="">Connect Wallet</span>
+                    </button> :
+                    <button
+                      className="flex items-center justify-center w-full px-3 py-5 font-semibold text-white uppercase rounded-lg bg-primary hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed"
+                      onClick={handleDepositUSDC}
+                      disabled={
+                        !isConnected ||
+                        (!isOGRound && !isPublicRound) ||
+                        (isOGRound && !isOGRoundWhitelisted) ||
+                        isEnded
+                      }
+                    >
+                      <span>Enter</span>
+                    </button>
+                  }
                 </div>
               </div>
             </div>

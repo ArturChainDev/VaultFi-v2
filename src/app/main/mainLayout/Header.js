@@ -1,21 +1,31 @@
 import React from 'react';
+import { ThemeProvider } from "@mui/material/styles";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Button } from '../components/Button';
+import { useSelector } from "react-redux";
+
+import {
+  selectFuseCurrentLayoutConfig,
+  selectToolbarTheme,
+} from "app/store/fuse/settingsSlice";
 export const Header = () => {
+  const toolbarTheme = useSelector(selectToolbarTheme);
   return (
     <div className="flex flex-col">
       <div className="relative flex items-center justify-between z-30">
-        <img
-          className="logo-icon"
-          src="assets/images/logo/vault_logo.png"
-          alt="logo"
-          width={'200px'}
-        />
         <a
           aria-current="page"
-          href="/"
-          className="router-link-active router-link-exact-active flex items-center gap-1.5 md:gap-2"
-        ></a>
+          href="/presale"
+        >
+          <img
+            className="logo-icon"
+            src="assets/images/logo/vault_logo.png"
+            alt="logo"
+            width={'200px'}
+          />
+        </a>
         <div className="hidden md:flex">
-          <div className="text-md flex items-center md:gap-10 gap-4">
+          <div className="text-md flex items-center md:gap-8 gap-4">
             <a
               href="/#roadmap"
               className="text-gold hover:text-white whitespace-nowrap px-3 py-1 bg-white/20 rounded-md"
@@ -42,9 +52,9 @@ export const Header = () => {
             </a>
           </div>
         </div>
-        <div className="hidden md:flex items-center justify-center gap-2">
+        <div className="hidden md:flex items-center justify-center gap-2 px-3">
           <a
-            href="https://t.me/hypeloot"
+            href="#"
             target="_blank"
             className="flex items-center justify-center"
           >
@@ -54,7 +64,7 @@ export const Header = () => {
             />
           </a>
           <a
-            href="https://twitter.com/Hypelootcom"
+            href="#"
             target="_blank"
             className="flex items-center justify-center"
           >
@@ -67,25 +77,106 @@ export const Header = () => {
 
         <div className="flex gap-1 md:gap-1.5">
           <div className="relative">
-            <button className="flex items-center bg-primary px-3 h-10 gap-2 md:gap-2.5 rounded-md">
-              <span className="hidden md:block text-sm font-medium">
-                Connect Wallet
-              </span>
-              <span className="flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M13 18C13 17.45 12.55 17 12 17H3V11H21V5C21 3.9 20.1 3 19 3H3C1.89 3 1.01 3.89 1.01 5L1 17C1 18.11 1.89 19 3 19H12C12.55 19 13 18.55 13 18ZM19 7H3V5H19V7ZM19 21C18.45 21 18 20.55 18 20V18H16C15.45 18 15 17.55 15 17C15 16.45 15.45 16 16 16H18V14C18 13.45 18.45 13 19 13C19.55 13 20 13.45 20 14V16H22C22.55 16 23 16.45 23 17C23 17.55 22.55 18 22 18H20V20C20 20.55 19.55 21 19 21Z"
-                    fill="white"
-                  ></path>
-                </svg>
-              </span>
-            </button>
+
+            <ConnectButton.Custom
+              showBalance={{
+                smallScreen: false,
+                largeScreen: true,
+              }}
+            >
+              {({
+                account,
+                chain,
+                openAccountModal,
+                openChainModal,
+                openConnectModal,
+                authenticationStatus,
+                mounted,
+              }) => {
+                // Note: If your app doesn't use authentication, you
+                // can remove all 'authenticationStatus' checks
+                const ready = mounted && authenticationStatus !== "loading";
+                const connected =
+                  ready &&
+                  account &&
+                  chain &&
+                  (!authenticationStatus ||
+                    authenticationStatus === "authenticated");
+
+                return (
+                  <div
+                    {...(!ready && {
+                      "aria-hidden": true,
+                      style: {
+                        opacity: 0,
+                        pointerEvents: "none",
+                        userSelect: "none",
+                      },
+                    })}
+                  >
+                    {(() => {
+                      if (!connected) {
+                        return (
+                          <Button onClick={openConnectModal} >
+                            Connect Wallet
+                          </Button>
+                        );
+                      }
+
+                      if (chain.unsupported) {
+                        return (
+                          <Button
+                            onClick={openChainModal}
+                          >
+                            Wrong network
+                          </Button>
+                        );
+                      }
+
+                      return (
+                        <ThemeProvider theme={toolbarTheme}>
+                          <div style={{ display: "flex", gap: 12 }}>
+                            <Button
+                              onClick={openChainModal}
+                              sx={{ display: "flex", alignItems: "center" }}
+                            >
+                              {chain.hasIcon && (
+                                <div
+                                  style={{
+                                    background: chain.iconBackground,
+                                    width: 12,
+                                    height: 12,
+                                    borderRadius: 999,
+                                    overflow: "hidden",
+                                    marginRight: 4,
+                                  }}
+                                >
+                                  {chain.iconUrl && (
+                                    <img
+                                      alt={chain.name ?? "Chain icon"}
+                                      src={chain.iconUrl}
+                                      style={{ width: 12, height: 12 }}
+                                    />
+                                  )}
+                                </div>
+                              )}
+                              {chain.name}
+                            </Button>
+
+                            <Button
+                              onClick={openAccountModal}
+                            >
+                              {account.displayName}
+                            </Button>
+                          </div>
+                        </ThemeProvider>
+                      );
+                    })()}
+                  </div>
+                );
+              }}
+            </ConnectButton.Custom>
+
           </div>
         </div>
       </div>

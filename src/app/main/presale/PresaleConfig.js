@@ -31,7 +31,7 @@ import React, { lazy } from 'react';
  */
 
 
-const PresalePage = lazy(() => import('./PresalePage'));
+const PresalePage = lazy(() => import('../landing/PresalePage'));
 
 const PresaleConfig = {
   settings: {

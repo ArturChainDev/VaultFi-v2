@@ -5,7 +5,7 @@ const SubBoard = ({ number, title, content, children, url }) => {
       <div
         className={`${
           number === 6 ? 'bg-primary' : 'bg-[#332A6A]'
-        } flex h-full flex-col p-10 items-center rounded-2xl bg-[#332A6A] md:p-7`}
+        } flex h-full flex-col p-10 items-center rounded-2xl md:p-7`}
       >
         <div
           className={`${

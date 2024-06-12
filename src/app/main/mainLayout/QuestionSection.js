@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../../../App.css';
+// import '../../../App.css';
 
 const AccordionItem = ({ id, title, children, isOpen, toggle, isUsed }) => {
   const contentRef = useRef(null);
