@@ -12,7 +12,7 @@ export const SecureWidget = () => {
             Economic Audit
           </h3>
           <p className="text-md text-center font-medium text-white/80">
-            VaultFi is the only DeFi protocol that has been peer-reviewed by an international panel consisting of PhDs, CPAs, CFAs, financial analysts, auditors, quantitative analysts, accountants, mathematicians, and financial modelers.
+          VaultFi is the only DeFi protocol that has been peer-reviewed by some of the most accomplished names in the finance and consulting world: an international independent panel consisting of PhDs, CPAs, CFAs, financial analysts, auditors, quantitative analysts, accountants, mathematicians, and financial modelers - including current and former members from KPMG, JPMorgan Chase, PwC, Ernst & Young, Deloitte, Yale University, and others.
           </p>
         </div>
         <a

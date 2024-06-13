@@ -905,11 +905,11 @@ function PresaleWidget(props) {
                   <div className="flex w-fit md:w-full flex-shrink-0 py-1">
                     <div id="chart" className="flex relative">
                       <img
-                        src="/assets/images/charts/VaultFiChart.png"
+                        src="/assets/images/charts/Chart-desktop.jpg"
                         className="hidden md:flex w-full h-auto"
                       />
                       <img
-                        src="/assets/images/charts/VaultFiChart-mobile.png"
+                        src="/assets/images/charts/Chart-mobile.jpg"
                         className="flex md:hidden w-full h-auto"
                       />
                     </div>
