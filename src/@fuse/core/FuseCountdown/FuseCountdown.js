@@ -1,4 +1,3 @@
-import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -49,37 +48,37 @@ function FuseCountdown(props) {
 
   return (
     <div className={clsx('flex items-center', props.className)}>
-      <div className="flex flex-col items-center justify-center px-5">
-        <Typography variant="h4" className="mb-4">
+      <div className="flex flex-col items-center justify-center px-3">
+        <h3 className="mb-4 text-2xl">
           {countdown.days}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
+        </h3>
+        <p className='text-white/50' variant="caption" color="text.secondary">
           days
-        </Typography>
+        </p>
       </div>
-      <div className="flex flex-col items-center justify-center px-5">
-        <Typography variant="h4" className="mb-4">
+      <div className="flex flex-col items-center justify-center px-3">
+        <h3 className="mb-4 text-2xl">
           {countdown.hours}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
+        </h3>
+        <p variant="caption" color="text.secondary">
           hours
-        </Typography>
+        </p>
       </div>
-      <div className="flex flex-col items-center justify-center px-5">
-        <Typography variant="h4" className="mb-4">
+      <div className="flex flex-col items-center justify-center px-3">
+        <h3 className="mb-4 text-2xl">
           {countdown.minutes}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
+        </h3>
+        <p variant="caption" color="text.secondary">
           minutes
-        </Typography>
+        </p>
       </div>
-      <div className="flex flex-col items-center justify-center px-5">
-        <Typography variant="h4" className="mb-4">
+      <div className="flex flex-col items-center justify-center px-3">
+        <h3 className="mb-4 text-2xl">
           {countdown.seconds}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
+        </h3>
+        <p variant="caption" color="text.secondary">
           seconds
-        </Typography>
+        </p>
       </div>
     </div>
   );

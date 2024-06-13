@@ -5,8 +5,8 @@ import { mainnet,sepolia } from '@wagmi/core/chains';
 
 export const getContract = async (address, abi, signer = null) => {
     
-    const provider = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/e_gVHvuJXGCpnl9kuKQBI0-Hpy8y0bCQ');    // Ethereum mainnet
-    //const provider = new ethers.providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/FSIkzAXAwhMC7aKV-fBgxkbek-w6R-uT');    // sepolia test net
+    //const provider = new ethers.providers.JsonRpcProvider('https://eth-mainnet.g.alchemy.com/v2/e_gVHvuJXGCpnl9kuKQBI0-Hpy8y0bCQ');    // Ethereum mainnet
+    const provider = new ethers.providers.JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/FSIkzAXAwhMC7aKV-fBgxkbek-w6R-uT');    // sepolia test net
     //const provider = new ethers.providers.JsonRpcProvider('https://polygon-mainnet.g.alchemy.com/v2/ENOw1bLQi5mcRwdyVnlfXdX81Ij3A-12');  // polygon mainnet
     
     const finalSigner = signer !== null ?  signer : provider;
@@ -29,8 +29,8 @@ export function walletClientToSigner(walletClient) {
 export async function getEtherSigner() {
     const walletClient = await getWalletClient({
         //chainId: polygon.id,
-        chainId: mainnet.id,
-        //chainId: sepolia.id,
+        // chainId: mainnet.id,
+        chainId: sepolia.id,
     });
     if (!walletClient) {
         return null;

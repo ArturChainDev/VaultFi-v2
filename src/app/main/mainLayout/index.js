@@ -1,5 +1,5 @@
 import { Header } from './Header';
-import { PresaleWidget } from './PresaleWidget';
+import  PresaleWidget  from './PresaleWidget';
 import { SecureWidget } from './SecureWidget'
 import { KeyMetrics } from './KeyMetrics'
 import { SummaryWidget } from './SumarryWidget';

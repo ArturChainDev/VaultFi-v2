@@ -9,8 +9,8 @@ const FalseMark = () => {
 
 export const GamblingWidget = () => {
   return (
-    <div className='m-auto overflow-auto w-[90vw]'>
-      <div className="flex flex-col gap-2.5 md:gap-5 w-full">
+    <div className='flex '>
+      <div className="flex flex-col m-auto overflow-auto w-[90vw]  gap-2.5 md:gap-5">
         <h3 className="text-center text-3xl font-extrabold italic uppercase md:text-5xl">
           DISRUPTING THE DEFI SECTOR
         </h3>

@@ -42,49 +42,49 @@ const App = () => {
 
   return (
     // <CacheProvider value={createCache(emotionCacheOptions[langDirection])}>
-    // <FuseTheme theme={mainTheme} direction={langDirection}>
-    <BrowserRouter>
-      <FuseAuthorization
-        userRole={user.role}
-        loginRedirectUrl={settingsConfig.loginRedirectUrl}
-      >
-        <WagmiConfig config={wagmiConfig}>
-          <Web3ReactProvider getLibrary={getLibrary}>
-            <RainbowKitProvider chains={chains} theme={null}>
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `
+      <FuseTheme theme={mainTheme} direction={langDirection}>
+        <BrowserRouter>
+          <FuseAuthorization
+            userRole={user.role}
+            loginRedirectUrl={settingsConfig.loginRedirectUrl}
+          >
+            <WagmiConfig config={wagmiConfig}>
+              <Web3ReactProvider getLibrary={getLibrary}>
+                <RainbowKitProvider chains={chains} theme={null}>
+                  <style
+                    dangerouslySetInnerHTML={{
+                      __html: `
                       :root {
                         ${cssStringFromTheme(darkTheme)}
                       }
 
                       html[data-dark] {
                         ${cssStringFromTheme(darkTheme, {
-                    extends: lightTheme,
-                  })}
+                        extends: lightTheme,
+                      })}
                       }
                     `,
-                }}
-              />
-              <SnackbarProvider
-                maxSnack={5}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                classes={{
-                  containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99',
-                }}
-              >
-                <FuseLayout layouts={themeLayouts} />
-              </SnackbarProvider>
-            </RainbowKitProvider>
+                    }}
+                  />
+                  <SnackbarProvider
+                    maxSnack={5}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right',
+                    }}
+                    classes={{
+                      containerRoot: 'bottom-0 right-0 mb-52 md:mb-68 mr-8 lg:mr-80 z-99',
+                    }}
+                  >
+                    <FuseLayout layouts={themeLayouts} />
+                  </SnackbarProvider>
+                </RainbowKitProvider>
 
-          </Web3ReactProvider>
-        </WagmiConfig>
-      </FuseAuthorization>
-    </BrowserRouter>
-    // </FuseTheme>
+              </Web3ReactProvider>
+            </WagmiConfig>
+          </FuseAuthorization>
+        </BrowserRouter>
+      </FuseTheme>
     // </CacheProvider>
   );
 };

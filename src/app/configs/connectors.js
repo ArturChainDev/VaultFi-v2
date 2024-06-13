@@ -15,7 +15,7 @@ import {
 const projectId = 'b9dacde9577e9aa82c83cff5a8aee900';
 
 export const { chains, publicClient, webSocketPublicClient } = configureChains(
-    [ mainnet],
+    [ mainnet, sepolia, polygon],
     [ publicProvider() ]
 );
 
@@ -39,7 +39,7 @@ const connectors = connectorsForWallets([
 ]);
 
 export const wagmiConfig = createConfig({
-    autoConnect: true,
+    autoConnect: false,
     connectors,
     publicClient,
     webSocketPublicClient,

@@ -37,7 +37,7 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-export function PresaleWidget(props) {
+function PresaleWidget(props) {
   const theme = useTheme();
   const query = useQuery();
 
@@ -60,7 +60,7 @@ export function PresaleWidget(props) {
   const [referrer, setReferrer] = useState(ZERO_ADDR);
 
   const [inputTokens, setInputTokens] = useState(1000000);
-  const [usdcForTokens, setUsdcForTokens] = useState(
+  const [priceForTokens, setPriceForTokens] = useState(
     1000000 * TOKEN_PRICE
   );
 
@@ -173,8 +173,7 @@ export function PresaleWidget(props) {
         presaleContract.getPublicRoundTokenLimited(),
         presaleContract.totalTokensRequested(),
       ])
-      // = await presaleContract.getPublicRoundStartedAt();
-      // let _publicRoundDuration = await presaleContract.getPublicRoundDuration();
+
       setPublicRoundEndAt(
         convertSecondsToDate(
           fromBigNum(_publicRoundStartedAt, 0) +
@@ -185,28 +184,13 @@ export function PresaleWidget(props) {
         _publicRowRoundTokenLimited
       );
 
-      // let _publicRoundTokenLimited = fromBigNum(
-      //   await presaleContract.getPublicRoundTokenLimited()
-      // );
       setPublicRoundTokenLimited(_publicRoundTokenLimited);
     }
-
-    // let _tokenRequested = fromBigNum(
-    //   await presaleContract.getTokensRequestedOfWallet(address)
-    // );
-    // setTokenRequested(_tokenRequested);
-
-    // let _bonusRequested = fromBigNum(
-    //   await presaleContract.getBonusRequested(address)
-    // );
-    // setBonusRequested(_bonusRequested);
 
     let _totalTokensRequested = fromBigNum(
       _totalRowTokensRequested
     );
-    // let _totalTokensRequested = fromBigNum(
-    //   await presaleContract.totalTokensRequested()
-    // );
+
     setTotalTokensRequested(_totalTokensRequested);
 
     if (_totalTokensRequested >= TOTAL_MAX_ALLOCATION) {
@@ -284,57 +268,71 @@ export function PresaleWidget(props) {
     }
   };
 
-  const incrementValue = () => {
-    const roundedInputTokens = Math.round(inputTokens / STEP) * STEP;
-    const increaseValue = Math.min(roundedInputTokens + STEP, MAX_TOKEN_VALUE);
-    setInputTokens(Math.min(roundedInputTokens + STEP, MAX_TOKEN_VALUE));
-    setUsdcForTokens(
-      Math.min(calculateUSDC(increaseValue), MAX_TOKEN_VALUE * TOKEN_PRICE)
-    );
-  };
+  // const incrementValue = () => {
+  //   const roundedInputTokens = Math.round(inputTokens / STEP) * STEP;
+  //   const increaseValue = Math.min(roundedInputTokens + STEP, MAX_TOKEN_VALUE);
+  //   setInputTokens(Math.min(roundedInputTokens + STEP, MAX_TOKEN_VALUE));
+  //   setPriceForTokens(
+  //     Math.min(calculateUSDC(increaseValue), MAX_TOKEN_VALUE * TOKEN_PRICE)
+  //   );
+  // };
 
   // Handler to decrement the value
-  const decrementValue = () => {
-    const roundedInputTokens = Math.round(inputTokens / STEP) * STEP;
-    const decreaseValue = Math.max(roundedInputTokens - STEP, MIN_TOKEN_VALUE);
-    setInputTokens(Math.max(roundedInputTokens - STEP, MIN_TOKEN_VALUE));
-    setUsdcForTokens(
-      Math.max(calculateUSDC(decreaseValue), MIN_TOKEN_VALUE * TOKEN_PRICE)
-    );
-  };
+  // const decrementValue = () => {
+  //   const roundedInputTokens = Math.round(inputTokens / STEP) * STEP;
+  //   const decreaseValue = Math.max(roundedInputTokens - STEP, MIN_TOKEN_VALUE);
+  //   setInputTokens(Math.max(roundedInputTokens - STEP, MIN_TOKEN_VALUE));
+  //   setPriceForTokens(
+  //     Math.max(calculateUSDC(decreaseValue), MIN_TOKEN_VALUE * TOKEN_PRICE)
+  //   );
+  // };
 
   const handleInputTokens = (event) => {
-    const value = event.target.value;
-    if (tokenType === 3) {
-      setInputTokens(value);
-      const usdc = calculateUSDC(value)
-      const usdcInSmallestUnit = toBigNum(usdc, 6);
-      const ethAmount = (usdcInSmallestUnit).div(toBigNum(ethPriceInUsdc, 6));
-      setUsdcForTokens(ethAmount);
-      return;
+    try {
+      const value = event.target.value;
+      if (tokenType === 3) {
+        setInputTokens(value);
+        const usdc = calculateUSDC(value)
+        const usdcInSmallestUnit = usdc;
+        // toBigNum(usdc, 0);
+        const ethAmount = (usdcInSmallestUnit / ethPriceInUsdc).toFixed(9);
+        setPriceForTokens(ethAmount);
+        return;
+      }
+      if (
+        /^\d*$/.test(value) &&
+        (parseInt(value, 10) >= MIN_TOKEN_VALUE ||
+          parseInt(value, 10) <= maxAllocation)
+      ) {
+        setInputTokens(value);
+        setPriceForTokens(calculateUSDC(value));
+      }
+    } catch (error) {
+      console.log(error);
     }
-    if (
-      /^\d*$/.test(value) &&
-      (parseInt(value, 10) >= MIN_TOKEN_VALUE ||
-        parseInt(value, 10) <= maxAllocation)
-    ) {
-      setInputTokens(value);
-      setUsdcForTokens(calculateUSDC(value));
-    }
-  };
+  }
 
   const handleInputPrice = (event) => {
-
-    const value = event.target.value;
-    setUsdcForTokens(value);
-    if (value === "") {
-      setInputTokens(0);
-    } else if (tokenType === 3) {
-      const usdc = ethPriceInUsdc * value;
-      setInputTokens(toBigNum(usdc, 4).div(toBigNum(TOKEN_PRICE, 4)))
-    } else {
-      setInputTokens(toBigNum(value, 4).div(toBigNum(TOKEN_PRICE, 4)))
+    try {
+      const value = event.target.value;
+      setPriceForTokens(Number(value));
+      if (value === "") {
+        setInputTokens(0);
+      } else if (tokenType === 3) {
+        const usdc = ethPriceInUsdc * value;
+        setInputTokens(toBigNum(usdc, 18).div(toBigNum(TOKEN_PRICE, 18)))
+      } else {
+        setInputTokens(toBigNum(value, 6).div(toBigNum(TOKEN_PRICE, 6)))
+      }
+    } catch (error) {
+      console.log(error);
     }
+  }
+
+  const selectTokenType = (number) => {
+    setTokenType(Number(number));
+    setPriceForTokens(0);
+    setInputTokens(0);
   }
 
   const handleDepositUSDC = async () => {
@@ -466,13 +464,15 @@ export function PresaleWidget(props) {
     }
 
     const usdcContract = await getContract(
-      USDCData.address,
+      // USDCData.address,
+      "0x5596693792317Cb0e8FD0DF899a32EB84B881107",
       USDCData.abi,
       signer
     );
 
     const usdtContract = await getContract(
-      USDTData.address,
+      // USDTData.address,
+      "0x49584DeBFAA21989130df0A5BD5Af4DbB224b354",
       USDTData.abi,
       signer
     );
@@ -605,11 +605,6 @@ export function PresaleWidget(props) {
     }
   };
 
-  <img
-    src="assets/images/tokens/usdc.webp"
-    alt="USDC"
-    className="object-contain w-6 h-6"
-  />
 
   const switchImage = (tokenType) => {
     if (tokenType === 1) {
@@ -726,7 +721,7 @@ export function PresaleWidget(props) {
                       <div className="flex items-center gap-4">
                         <div className="grid grid-cols-3 gap-0.5 w-full rounded-xl overflow-hidden">
                           <button
-                            onClick={() => setTokenType(Number(3))}
+                            onClick={() => selectTokenType(Number(3))}
                             className={`${tokenType === 3 ? 'bg-primary' : 'bg-white/10'} " p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75"`}>
                             <div className="relative flex">
                               <img
@@ -738,7 +733,7 @@ export function PresaleWidget(props) {
                             ETH
                           </button>
                           <button
-                            onClick={() => setTokenType(Number(2))}
+                            onClick={() => selectTokenType(Number(2))}
                             className={`${tokenType === 2 ? 'bg-primary' : 'bg-white/10'} " p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75"`}>
                             <div className="relative flex">
                               <img
@@ -754,7 +749,7 @@ export function PresaleWidget(props) {
                             USDT
                           </button>
                           <button
-                            onClick={() => setTokenType(Number(1))}
+                            onClick={() => selectTokenType(Number(1))}
                             className={`${tokenType === 1 ? 'bg-primary' : 'bg-white/10'} " p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75"`}>
                             <div className="relative flex">
                               <img
@@ -785,7 +780,7 @@ export function PresaleWidget(props) {
                       </label>
                       <div className="relative">
                         <input
-                          value={usdcForTokens}
+                          value={priceForTokens}
                           onChange={handleInputPrice}
                           type="number"
                           inputMode="numeric"
@@ -882,7 +877,7 @@ export function PresaleWidget(props) {
                         isEnded
                       }
                     >
-                      <span>Enter</span>
+                      {loading ? <span>Pending</span> : <span>Enter</span>}
                     </button>
                   }
                 </div>
@@ -912,3 +907,5 @@ export function PresaleWidget(props) {
     </div>
   );
 };
+
+export default memo(PresaleWidget)
