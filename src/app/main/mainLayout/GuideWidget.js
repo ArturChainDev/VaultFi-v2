@@ -1,7 +1,7 @@
 import React from 'react';
 const SubBoard = ({ number, title, content, children, url }) => {
   return (
-    <div className="p-3 md:col-span-3" id='how-to-buy'>
+    <div className="p-3 md:col-span-3" >
       <div
         className={`${number === 6 ? 'bg-primary' : 'bg-[#332A6A]'
           } flex h-full flex-col p-10 items-center rounded-2xl md:p-7`}
@@ -18,7 +18,9 @@ const SubBoard = ({ number, title, content, children, url }) => {
             } text-center font-medium`}>
             {content}
           </p>
-          <a href='#' className="underline text-primary">{url}</a>
+          <div className='flex'>
+          <a href='#' className="flex m-auto md:text-center underline text-primary">{url}</a>
+          </div>
         </div>
       </div>
       {children}
@@ -27,11 +29,11 @@ const SubBoard = ({ number, title, content, children, url }) => {
 };
 export const GuideWidget = () => {
   return (
-    <div className="my-28 ">
+    <div className="my-28 " id='how-to-buy'>
       <h3 className="text-center text-3xl font-extrabold italic uppercase md:text-5xl">
         HOW TO BUY VAULTFI GUIDE
       </h3>
-      <div className="hidden md:grid items-stretch md:grid-cols-11 my-28 ">
+      <div className="hidden md:grid items-stretch md:grid-cols-11 my-10 md:my-28 ">
         <SubBoard
           content={'Visit our website:'}
           number={1}
@@ -65,10 +67,11 @@ export const GuideWidget = () => {
           means there are 2 transactions that you need to approve.
         </p>
       </div>
-      <div className="md:hidden grid items-stretch grid-cols-1 md:grid-cols-3 my-28 ">
+      <div className="md:hidden grid items-stretch grid-cols-1 md:grid-cols-3 my-10 md:my-28 ">
         <SubBoard
           content={'Visit our website: Presale.vault-finance.com'}
           number={1}
+          url={"Presale.vault-finance.com"}
         />
         <img src='assets/images/arrow.png' width={60} className='rotate-90 m-auto' />
         <SubBoard content={'Connect your wallet'} number={2} />

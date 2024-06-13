@@ -160,29 +160,6 @@ export function PresaleWidget(props) {
       PresaleData.abi
     );
 
-    // getting OGRound info
-    // let _isOGRound = await presaleContract.checkOGRound();
-    // setIsOGRound(_isOGRound);
-    // if (_isOGRound) {
-    //   let _isOGRoundWhiltelisted = await presaleContract.isOGWhitelisted(
-    //     address
-    //   );
-    //   setIsOGRoundWhitelisted(_isOGRoundWhiltelisted);
-
-    //   let _ogRoundDuration = await presaleContract.getOGRoundDuration();
-    //   let _ogRoundStartedAt = await presaleContract.getOGRoundStartedAt();
-    //   setOgRoundEndAt(
-    //     convertSecondsToDate(
-    //       fromBigNum(_ogRoundStartedAt, 0) + fromBigNum(_ogRoundDuration + 86400, 0)
-    //     )
-    //   );
-
-    //   let _ogRoundTokenLimited = fromBigNum(
-    //     await presaleContract.getOGRoundTokenLimited(address)
-    //   );
-    //   setOGRoundTokenLimited(_ogRoundTokenLimited);
-    // }
-
     // getting public round info
     let _isPublicRound = await presaleContract.checkPublicRound();
     setIsPublicRound(_isPublicRound);
@@ -683,6 +660,38 @@ export function PresaleWidget(props) {
                     <p className="font-bold uppercase text-fire text-center italic text-[55px] w-full truncate bg-gradient-to-r from-[#FFD600] to-[#FFEC86]/90 bg-clip-text">
                       $547,140
                     </p>
+
+                    <div className="flex flex-col text-white/50 flex-auto mt-10 items-center">
+                      <p>
+                        {isEnded && "Presale is over!"}
+                        {!isEnded && isOGRound && "Time left until OG round ends"}
+                        {!isEnded && isPublicRound && "Time left until Pre-sale ends:"}
+                        {!isEnded && !isOGRound && !isPublicRound && "Round pending"}
+                      </p>
+                    </div>
+
+                    <div className="flex text-white/50 flex-col items-center mt-5 mb-5">
+                      {!isEnded &&
+                        (isPublicRound && publicRoundEndAt != "" ? (
+                          <FuseCountdown endDate={publicRoundEndAt} />
+                        ) : (
+                          isPublicRound && (
+                            <p className="mt-10 mb-10">Loading...</p>
+                          )
+                        ))}
+
+                      {!isEnded &&
+                        (isOGRound && ogRoundEndAt != "" ? (
+                          <FuseCountdown endDate={ogRoundEndAt} />
+                        ) : (
+                          isOGRound && (
+                            <p className="mt-10 mb-10">Loading...</p>
+                          )
+                        ))}
+
+                      {!isOGRound && !isPublicRound && <FuseCountdown endDate={"0"} />}
+                    </div>
+
                     <div className="space-y-1">
                       <p className="text-xs text-white/50">
                         {calculateRateOfProgressBar()}% of minimum goal raised
@@ -781,12 +790,12 @@ export function PresaleWidget(props) {
                           type="number"
                           inputMode="numeric"
                           className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
-                          // disabled={
-                          //   !isConnected ||
-                          //   (!isOGRound && !isPublicRound) ||
-                          //   (isOGRound && !isOGRoundWhitelisted) ||
-                          //   isEnded
-                          // }
+                        // disabled={
+                        //   !isConnected ||
+                        //   (!isOGRound && !isPublicRound) ||
+                        //   (isOGRound && !isOGRoundWhitelisted) ||
+                        //   isEnded
+                        // }
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-5">
                           {switchImage(tokenType)}
@@ -892,30 +901,6 @@ export function PresaleWidget(props) {
                         src="/assets/images/charts/VaultFiChart-mobile.png"
                         className="flex md:hidden w-full h-auto"
                       />
-                    </div>
-                    <div
-                      id="tooltip"
-                      className="fixed p-2 pointer-events-none hidden -translate-x-1/2 -translate-y-full"
-                      style={{
-                        display: 'none',
-                        left: '976.365px',
-                        top: '243.08px',
-                      }}
-                    >
-                      <div className="bg-white/30 rounded-md backdrop-blur-sm shadow-md p-2 py-1 md:p-2.5 -ml-0.5">
-                        <p
-                          id="tooltip-text"
-                          className="text-white text-[10px] md:text-sm text-center"
-                        >
-                          $1,142,210
-                        </p>
-                        <p
-                          id="tooltip-label"
-                          className="mt-0.6 text-white/50 text-[10px] md:text-sm text-center"
-                        >
-                          Revenue
-                        </p>
-                      </div>
                     </div>
                   </div>
                 </div>
