@@ -27,11 +27,11 @@ const SubBoard = ({ number, title, content, children, url }) => {
 };
 export const GuideWidget = () => {
   return (
-    <div className="my-28">
+    <div className="my-28 ">
       <h3 className="text-center text-3xl font-extrabold italic uppercase md:text-5xl">
         HOW TO BUY VAULTFI GUIDE
       </h3>
-      <div className="hidden md:grid items-stretch md:grid-cols-12 my-28 ">
+      <div className="hidden md:grid items-stretch md:grid-cols-11 my-28 ">
         <SubBoard
           content={'Visit our website:'}
           number={1}

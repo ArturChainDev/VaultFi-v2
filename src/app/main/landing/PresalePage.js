@@ -1,4 +1,7 @@
 import React, {lazy} from 'react';
+import FooterLayout1 from "app/theme-layouts/layout1/components/FooterLayout1";
+import { SocialIcon } from '../components/SocialIcon';
+import { Footer } from '../components/Footer';
 import {
   Header,
   PresaleWidget,
@@ -17,7 +20,7 @@ import {
 } from '../mainLayout';
 const PresalePage = () => {
   return (
-    <div className="relative flex flex-col gap-5 md:gap-8 p-3 md:px-18 md:p-7 md:pt-2 max-w-[1300px] mx-auto !pb-28">
+    <div className="relative flex flex-col gap-5 md:gap-8 p-3 md:px-18 md:p-7 md:pt-2 mx-auto ">
       <Header />
       <div >
         <PresaleWidget />
@@ -34,6 +37,8 @@ const PresalePage = () => {
         <TeammateWidget />
         <QuestionWidget />
       </div>
+      <SocialIcon />
+      <Footer />
     </div>
   );
 };

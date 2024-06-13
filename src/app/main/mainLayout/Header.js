@@ -183,25 +183,25 @@ export const Header = () => {
       <div className="flex md:hidden px-3 py-3 no-scrollbar">
         <div className="flex items-center gap-2 mx-auto">
           <a
-            href="/#roadmap"
+            href="presale/#roadmap"
             className="px-3 py-1 text-sm text-gold bg-white/20 hover:opacity-90 rounded-md hover:text-white whitespace-nowrap"
           >
             Growth Potential
           </a>
           <a
-            href="/#tokenomics"
+            href="presale/#tokenomics"
             className="text-sm text-white/50 hover:text-white whitespace-nowrap"
           >
             Tokenomics
           </a>
           <a
-            href="/#how-to-buy"
+            href="presale/#how-to-buy"
             className="text-sm text-white/50 hover:text-white whitespace-nowrap"
           >
             How to Buy
           </a>
           <a
-            href="/#faq"
+            href="presale/#faq"
             className="text-sm text-white/50 hover:text-white whitespace-nowrap"
           >
             FAQ

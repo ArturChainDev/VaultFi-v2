@@ -13,7 +13,7 @@ export const BenefitWidget = () => {
       <h3 className="mb-2.5 text-2xl text-center font-semibold">
         Lowest VaultFi Token Price
       </h3>
-      <p className="text-md max-w-[820px] m-auto px-4 md:px-0 text-center font-medium text-white/90">
+      <p className="text-md max-w-[820px] m-auto p-4 md:px-0 text-center font-medium text-white/90">
         During the pre-sale, you can buy VaultFi tokens at the lowest possible
         price before the token launches on centralized and decentralized
         exchanges. On top of that, VaultFi pre-sale buyers are eligible for the

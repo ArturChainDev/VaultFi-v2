@@ -1,7 +1,7 @@
 import React from 'react';
 export const ExpanationWidget = () => {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 overflow-auto">
       <div className="flex flex-col items-center">
         {/* <img
           src="/assets/how-it-works-mobile-z_GzepUP.png"
@@ -28,7 +28,7 @@ export const ExpanationWidget = () => {
         <div className="flex flex-col items-center gap-3">
           <img
             src="assets/images/logo/FlyWheel1 def.png"
-            className="max-w-[420px] md:w-full"
+            className=" md:w-full"
           />
           <div className="flex flex-col h-full items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
             <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -46,7 +46,7 @@ export const ExpanationWidget = () => {
         <div className="flex flex-col items-center gap-3">
           <img
             src="assets/images/logo/FlyWheel2 def.png"
-            className="max-w-[420px] md:w-full"
+            className=" md:w-full"
           />
           <div className="flex flex-col h-full items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
             <h3 className="mb-2.5 text-xl text-center font-semibold">
@@ -62,7 +62,7 @@ export const ExpanationWidget = () => {
         <div className="flex flex-col items-center gap-3">
           <img
             src="assets/images/logo/FlyWheel3 def.png"
-            className="max-w-[420px] md:w-full"
+            className=" md:w-full"
           />
           <div className="flex flex-col items-center p-5 rounded-2xl bg-[#332A6A] md:p-7">
             <h3 className="mb-2.5 text-xl text-center font-semibold">
