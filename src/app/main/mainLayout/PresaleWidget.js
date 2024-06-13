@@ -672,7 +672,7 @@ function PresaleWidget(props) {
                       $547,140
                     </p>
 
-                    <div className="flex flex-col text-white/50 flex-auto mt-10 items-center">
+                    {/* <div className="flex flex-col text-white/50 flex-auto mt-10 items-center">
                       <p>
                         {isEnded && "Presale is over!"}
                         {!isEnded && isOGRound && "Time left until OG round ends"}
@@ -701,7 +701,7 @@ function PresaleWidget(props) {
                         ))}
 
                       {!isOGRound && !isPublicRound && <FuseCountdown endDate={"0"} />}
-                    </div>
+                    </div> */}
 
                     <div className="space-y-1">
                       <p className="text-xs text-white/50">
