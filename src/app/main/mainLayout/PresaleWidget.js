@@ -340,10 +340,25 @@ function PresaleWidget(props) {
       return;
     }
 
-    if (Math.round(inputTokens / STEP) != inputTokens / STEP) {
+    // if (Math.round(inputTokens / STEP) != inputTokens / STEP) {
+    //   dispatch(
+    //     showMessage({
+    //       message: "Error: Token amount should be in increments of 100k!",
+    //       variant: "error",
+    //       anchorOrigin: {
+    //         vertical: "top",
+    //         horizontal: "right",
+    //       },
+    //     })
+    //   );
+      // setInputTokens(Math.round(inputTokens / STEP) * STEP);
+    //   return;
+    // }
+
+    if (inputTokens < 100000) {
       dispatch(
         showMessage({
-          message: "Error: Token amount should be in increments of 100k!",
+          message: "Error: Token amount should be more than 100k!",
           variant: "error",
           anchorOrigin: {
             vertical: "top",
@@ -351,9 +366,10 @@ function PresaleWidget(props) {
           },
         })
       );
-      setInputTokens(Math.round(inputTokens / STEP) * STEP);
+      // setInputTokens(Math.round(inputTokens / STEP) * STEP);
       return;
     }
+
     const signer = await getEtherSigner();
     const presaleContract = await getContract(
       PresaleData.address,
