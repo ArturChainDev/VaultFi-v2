@@ -331,8 +331,13 @@ function PresaleWidget(props) {
 
   const selectTokenType = (number) => {
     setTokenType(Number(number));
-    setPriceForTokens(0);
-    setInputTokens(0);
+    if(number === 3){
+      setPriceForTokens(0.217);
+    setInputTokens(1000000);
+    } else {
+    setPriceForTokens(800);
+    setInputTokens(1000000);
+    }
   }
 
   const handleDepositUSDC = async () => {
@@ -355,7 +360,7 @@ function PresaleWidget(props) {
     //   return;
     // }
 
-    if (inputTokens < 100000) {
+    if (inputTokens < 1000000) {
       dispatch(
         showMessage({
           message: "Error: Token amount should be more than 100k!",
