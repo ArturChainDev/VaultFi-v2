@@ -608,7 +608,7 @@ function PresaleWidget(props) {
 
 
   const calculateRateOfProgressBar = () => {
-    let rate = ((totalTokensRequested / TOTAL_MAX_ALLOCATION) * 100).toFixed(4);
+    let rate = (((totalTokensRequested * TOKEN_PRICE) / TOTAL_MAX_ALLOCATION) * 100).toFixed(4);
     return rate;
   };
 
@@ -674,9 +674,8 @@ function PresaleWidget(props) {
                 <div className="p-5 md:p-8 space-y-4">
                   <div className="space-y-3">
                     <p className="font-bold uppercase text-fire text-center italic text-[55px] w-full truncate bg-gradient-to-r from-[#FFD600] to-[#FFEC86]/90 bg-clip-text">
-                      $547,140
+                      {`$${formatNumberWithCommas(totalTokensRequested * TOKEN_PRICE)}`}
                     </p>
-
                     {/* <div className="flex flex-col text-white/50 flex-auto mt-10 items-center">
                       <p>
                         {isEnded && "Presale is over!"}
