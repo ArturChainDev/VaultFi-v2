@@ -1,21 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
+/* Overrides and variables */
+
 :root {
-  --scroll-duration: 5s; /* Adjust this value to change the scroll speed */
+	--gold: #cca44d;
+	--dark-blue: #0a0430;
+	--blue: #000550;
+	--light-blue: #101963;
+	--purple: #332a6a;
+	--sky-blue: #2747a0;
+	--text-size-sm: 0.875rem;
+	--line-height-sm: 1.25rem;
+}
+
+html 
+body {
+	/* font-size: 15px; */
+	background-color: var(--blue);
+	color: rgba(255, 255, 255, 0.85);
+	font-family: "Plus Jakarta Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	scroll-behavior: smooth;
 }
 
 body {
-  background-color: #000550;
-  color: white;
-  margin: auto;
-  font-family: rubik;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-size: 1.04rem;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -33,3 +51,245 @@ input[type=number] {
 input {
   background-color: #00000000;
 }
+
+h1,
+h2,
+h3,
+h4 {
+	color: white;
+	font-family: "Rubik", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	word-wrap: break-word;
+	font-weight: 600;
+}
+
+.container {
+	max-width: 1244px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+.container-sm {
+	max-width: 1124px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+/* Custom Scrollbar */
+
+.custom-scrollbar {
+	overflow: auto;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+	width: 7px;
+	height: 7px;
+	margin-top: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background-color: var(--light-blue);
+	border-radius: 30px;
+}
+
+.custom-scrollbar:not(.scroll-thumb-visible):-webkit-scrollbar-thumb {
+	visibility: hidden;
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+	visibility: visible;
+}
+
+/********* Utility Classes *********/
+
+.btn {
+	background-color: var(--gold);
+	color: white;
+	font-weight: 500;
+	border-radius: 0.375rem;
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	font-size: inherit;
+	padding: 8px 12px;
+	font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn:hover,
+.btn:focus {
+	box-shadow: none;
+	color: white;
+	filter: brightness(80%);
+}
+
+.dark-blue-bg {
+	background-color: var(--dark-blue);
+}
+
+.family-poppins {
+	font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.family-rubik {
+	font-family: "Rubik", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.gold-grad-text {
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	background-image: linear-gradient(to right, #ff9900, rgba(255, 236, 134, 0.9));
+}
+.gold-text {
+	color: var(--gold);
+}
+
+.bright-gold-text {
+	color: #ff9900;
+}
+/****** Header and Navigation ******/
+
+.nav-list {
+	display: flex;
+	gap: 1rem;
+	overflow-x: auto;
+	flex-shrink: 0;
+	align-items: center;
+}
+
+.nav-list a {
+	color: inherit;
+	font-size: 0.98rem;
+	line-height: 1.2rem;
+	text-decoration: none;
+	flex-shrink: 0;
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+	color: white;
+}
+
+.nav-list a.active {
+	color: #eddc5d;
+	padding: 4px 6px;
+	border-radius: 6px;
+	background-color: rgba(255, 255, 255, 0.1);
+	font-weight: 500;
+}
+
+.logo img {
+	height: 70px;
+}
+
+@media screen and (max-width: 576px) {
+	.logo img {
+		height: 55px;
+	}
+}
+
+/********* Hero section *********/
+@media screen and (min-width: 768px) {
+	.hero-text {
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+	}
+}
+
+.amount-raised {
+	color: #ff9900;
+	font-size: 48px;
+	line-height: 55px;
+	font-weight: 700;
+	font-style: italic;
+	text-transform: uppercase;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 100%;
+	text-align: center;
+}
+
+.raise-goal {
+	width: 100%;
+}
+.raise-goal span {
+	display: block;
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.6);
+}
+.raise-goal .progress {
+	height: 0.5rem;
+	position: relative;
+	overflow: hidden;
+	border-radius: 0.75rem;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.raise-goal .progress div {
+	position: absolute;
+	inset: 0;
+	height: 100%;
+	background-color: var(--gold);
+	background-image: linear-gradient(to right, #ff9900, rgba(255, 236, 134, 0.9));
+}
+
+/* Comparisom Table */
+.compare-table-head,
+.compare-table-data {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 7rem;
+	padding: 12px 20px;
+}
+
+.compare-table-data {
+	background-color: var(--purple);
+
+	font-weight: 500;
+}
+.compare-table-data.highlight {
+	background-color: var(--gold);
+}
+.compare-table-head {
+	gap: 10px;
+	flex-direction: column;
+}
+
+.compare-table-row-head {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 208px;
+	font-weight: 500;
+	background-color: var(--purple);
+}
+
+/* Team */
+
+@media (max-width: 1150px) {
+	.team {
+		background-size: 70%;
+	}
+}
+
+@media (max-width: 767px) {
+	.team {
+		background-size: 60%;
+		/* padding-top: 130px; */
+	}
+	.team .user_holder img {
+		max-width: 150px;
+	}
+	.team .audit-logo img {
+		max-width: 270px;
+		margin-bottom: 50px;
+	}
+	.team .sec_head {
+		padding-bottom: 0 !important;
+	}
+}
+

@@ -12,16 +12,3 @@
   animation-delay: 0.2s;
   transition: all 0.3s ease-in;
 }
-#telegram-button{
-  animation-delay: 0.1s;
-  transition: all 0.3s ease-in;
-}
-
-.accordion-content-open {
-  /* width: fit-content; */
-  max-height: 500px; 
-  /* adjust as needed */
-
-  padding-top: 1rem;
-  padding-bottom: 2rem;
-}

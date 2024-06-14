@@ -22,7 +22,7 @@ function FuseLoading(props) {
       <div className='flex flex-col items-center justify-center p-24 my-auto'>
         <div className='flex flex-col py-10'>
           <img
-            src="/assets/images/tokens/token.svg"
+            src="/tokens/token.svg"
             alt="token"
             className="h-20"
           />

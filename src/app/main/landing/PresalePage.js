@@ -1,5 +1,4 @@
-import React, {lazy} from 'react';
-import { SocialIcon } from '../components/SocialIcon';
+import React, { lazy, useEffect } from 'react';
 import { Footer } from '../components/Footer';
 import {
   Header,
@@ -18,10 +17,27 @@ import {
   QuestionWidget
 } from '../mainLayout';
 const PresalePage = () => {
+  useEffect(() => {
+
+    const modifyHeader = () => {
+      if (window.scrollY) {
+        document.getElementById('header-socials').classList.add('!hidden');
+        document.getElementById( 'mobile-nav-btn' ).classList.remove( '!px-4', '!py-3.5' )
+      } else {
+        document.getElementById('header-socials').classList.remove('!hidden')
+        document.getElementById( 'mobile-nav-btn' ).classList.add( '!px-4', '!py-3.5' )
+      }
+    }
+    document.addEventListener('scroll', modifyHeader)
+
+    return () => {
+      document.removeEventListener('scroll', modifyHeader)
+    }
+  }, [])
   return (
-    <div className="relative flex flex-col gap-5 md:gap-8 p-3 md:px-18 md:p-7 md:pt-2 mx-auto max-w-[1300px] ">
-      <Header />
-      <div >
+    <main className="flex">
+      <div className="m-auto md:px-4 pt-2 md:pt-4 pb-5">
+        <Header />
         <PresaleWidget />
         <SecureWidget />
         <KeyMetrics />
@@ -35,10 +51,12 @@ const PresalePage = () => {
         <WhitePaperWidget />
         <TeammateWidget />
         <QuestionWidget />
+        <Footer />
+        <div>
+          <div className="backdrop"></div>
+        </div>
       </div>
-      <SocialIcon />
-      <Footer />
-    </div>
+    </main>
   );
 };
 export default PresalePage;
