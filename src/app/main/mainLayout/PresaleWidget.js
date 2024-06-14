@@ -166,20 +166,18 @@ function PresaleWidget(props) {
     let _totalRowTokensRequested;
     if (_isPublicRound) {
 
-      let _publicRoundStartedAt, _publicRoundDuration, _publicRowRoundTokenLimited;
-      [_publicRoundStartedAt, _publicRoundDuration, _publicRowRoundTokenLimited, _totalRowTokensRequested] = await Promise.all([
-        presaleContract.getPublicRoundStartedAt(),
-        presaleContract.getPublicRoundDuration(),
+      let _publicRowRoundTokenLimited;
+      [ _publicRowRoundTokenLimited, _totalRowTokensRequested] = await Promise.all([
         presaleContract.getPublicRoundTokenLimited(),
         presaleContract.totalTokensRequested(),
       ])
 
-      setPublicRoundEndAt(
-        convertSecondsToDate(
-          fromBigNum(_publicRoundStartedAt, 0) +
-          fromBigNum(_publicRoundDuration - 86400, 0)
-        )
-      );
+      // setPublicRoundEndAt(
+      //   convertSecondsToDate(
+      //     fromBigNum(_publicRoundStartedAt, 0) +
+      //     fromBigNum(_publicRoundDuration - 86400, 0)
+      //   )
+      // );
       let _publicRoundTokenLimited = fromBigNum(
         _publicRowRoundTokenLimited
       );
@@ -214,13 +212,13 @@ function PresaleWidget(props) {
       );
       setIsOGRoundWhitelisted(_isOGRoundWhiltelisted);
 
-      let _ogRoundDuration = await presaleContract.getOGRoundDuration();
-      let _ogRoundStartedAt = await presaleContract.getOGRoundStartedAt();
-      setOgRoundEndAt(
-        convertSecondsToDate(
-          fromBigNum(_ogRoundStartedAt, 0) + fromBigNum(_ogRoundDuration + 86400, 0)
-        )
-      );
+      // let _ogRoundDuration = await presaleContract.getOGRoundDuration();
+      // let _ogRoundStartedAt = await presaleContract.getOGRoundStartedAt();
+      // setOgRoundEndAt(
+      //   convertSecondsToDate(
+      //     fromBigNum(_ogRoundStartedAt, 0) + fromBigNum(_ogRoundDuration + 86400, 0)
+      //   )
+      // );
 
       let _ogRoundTokenLimited = fromBigNum(
         await presaleContract.getOGRoundTokenLimited(address)
@@ -232,15 +230,15 @@ function PresaleWidget(props) {
     let _isPublicRound = await presaleContract.checkPublicRound();
     setIsPublicRound(_isPublicRound);
     if (_isPublicRound) {
-      let _publicRoundStartedAt =
-        await presaleContract.getPublicRoundStartedAt();
-      let _publicRoundDuration = await presaleContract.getPublicRoundDuration();
-      setPublicRoundEndAt(
-        convertSecondsToDate(
-          fromBigNum(_publicRoundStartedAt, 0) +
-          fromBigNum(_publicRoundDuration - 86400, 0)
-        )
-      );
+      // let _publicRoundStartedAt =
+      //   await presaleContract.getPublicRoundStartedAt();
+      // let _publicRoundDuration = await presaleContract.getPublicRoundDuration();
+      // setPublicRoundEndAt(
+      //   convertSecondsToDate(
+      //     fromBigNum(_publicRoundStartedAt, 0) +
+      //     fromBigNum(_publicRoundDuration - 86400, 0)
+      //   )
+      // );
 
       let _publicRoundTokenLimited = fromBigNum(
         await presaleContract.getPublicRoundTokenLimited()
