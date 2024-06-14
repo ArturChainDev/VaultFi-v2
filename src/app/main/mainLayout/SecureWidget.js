@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{memo} from 'react';
 export const SecureWidget = () => {
   return (
     <section className="container mt-20 md:pt-20">
@@ -11,7 +11,7 @@ export const SecureWidget = () => {
           <div className="flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] md:p-7 lg:w-3/5">
             <div className="md:h-[180px] flex items-center">
               {" "}
-              <img src="/bg/Clean-Audit.png" className="mb-5 w-36 md:w-56" />
+              <img loading="lazy" src="/bg/Clean-Audit.png" className="mb-5 w-36 md:w-56" />
             </div>
             <h3 className="mb-2.5 text-xl text-center font-semibold">Economic Audit</h3>
             <p className=" text-center font-medium  family-poppins">
@@ -19,19 +19,19 @@ export const SecureWidget = () => {
 
             </p>
             <div className="flex flex-wrap gap-4 items-end justify-center pt-10">
-              <img src="/bg/bakertilly.png" alt="" className="h-8" />
-              <img src="/bg/jpmorganchase.png" alt="" className="h-5" />
-              <img src="/bg/deloitte.png" alt="" className="h-5" />
-              <img src="/bg/ey.png" alt="" className="h-8" />
-              <img src="/bg/kpmg.png" alt="" className="h-8" />
-              <img src="/bg/pwc.png" alt="" className="h-8" />
-              <img src="/bg/yale.png" alt="" className="h-8" />
+              <img loading="lazy" src="/bg/bakertilly.png" alt="" className="h-8" />
+              <img loading="lazy" src="/bg/jpmorganchase.png" alt="" className="h-5" />
+              <img loading="lazy" src="/bg/deloitte.png" alt="" className="h-5" />
+              <img loading="lazy" src="/bg/ey.png" alt="" className="h-8" />
+              <img loading="lazy" src="/bg/kpmg.png" alt="" className="h-8" />
+              <img loading="lazy" src="/bg/pwc.png" alt="" className="h-8" />
+              <img loading="lazy" src="/bg/yale.png" alt="" className="h-8" />
             </div>
           </div>
           <div className="flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] md:p-7 lg:w-1/5 w-full h-auto">
             <div className="md:h-[180px] flex items-center">
               {" "}
-              <img src="/bg/certik.png" className="mb-5 w-36 md:w-40" />
+              <img loading="lazy" src="/bg/certik.png" className="mb-5 w-36 md:w-40" />
             </div>
             <h3 className="mb-2.5 text-xl text-center font-semibold">Audited by Certik</h3>
             <p className=" text-center font-medium  family-poppins">VaultFi has been fully audited by Certik.</p>
@@ -39,7 +39,7 @@ export const SecureWidget = () => {
           <div className="flex flex-col items-center  p-5 rounded-2xl bg-[var(--purple)] md:p-7 lg:w-1/5 w-full h-auto">
             <div className="md:h-[180px] flex items-center">
               {" "}
-              <img src="/bg/peckshield.png" className="mb-5 h-14 block mx-auto" />{" "}
+              <img loading="lazy" src="/bg/peckshield.png" className="mb-5 h-14 block mx-auto" />{" "}
             </div>
             <h3 className="mb-2.5 text-xl text-center font-semibold"> Audited by PeckShield </h3>
             <p className=" text-center font-medium  family-poppins">

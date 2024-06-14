@@ -20,8 +20,8 @@ const AccordionItem = ({ id, title, children, isOpen, toggle, isUsed }) => {
         </span>
         <div className="flex flex-shrink-0 rotate-180 !rotate-0">
           {
-            isUsed ? <img src="/arrow.svg" alt="" id={"arrow"} className={isOpen ? `-rotate-180` : ``} /> :
-              <img src="/arrow.svg" alt="" id={"arrow"} className={`-rotate-180`} />
+            isUsed ? <img loading="lazy" src="/arrow.svg" alt="" id={"arrow"} className={isOpen ? `-rotate-180` : ``} /> :
+              <img loading="lazy" src="/arrow.svg" alt="" id={"arrow"} className={`-rotate-180`} />
           }
 
         </div>
@@ -100,8 +100,6 @@ export const QuestionSection = () => {
             buffer against market volatility.
           </p>
         </AccordionItem>
-      </div>
-      <div className="flex flex-col gap-3 md:gap-5">
         <AccordionItem
           id="Four"
           title="Where will I be able to exchange and trade my VaultFi tokens?"
@@ -114,6 +112,8 @@ export const QuestionSection = () => {
             the short term.
           </p>
         </AccordionItem>
+      </div>
+      <div className="flex flex-col gap-3 md:gap-5">
         <AccordionItem
           id="Three"
           title="How can the APY be sustainable?"

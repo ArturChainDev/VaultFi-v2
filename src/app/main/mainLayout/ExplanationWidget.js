@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 export const ExpanationWidget = () => {
   return (
     <section className="container mt-20 md:pt-20 md:text-center ">
@@ -15,7 +15,7 @@ export const ExpanationWidget = () => {
     </div>
     <div className="flex flex-col gap-16 md:gap-6 md:grid md:grid-cols-3">
       <div className="flex flex-col gap-16 md:gap-20 ">
-        <img src="/bg/flywheel1.png" alt="" />
+        <img loading="lazy" src="/bg/flywheel1.png" alt="" />
         <div className="flex flex-col items-center h-full p-5 rounded-2xl bg-[var(--purple)] md:p-7">
           <h3 className="mb-2.5 text-xl text-center font-semibold">Phase 1: Treasury</h3>
           <p className=" text-center font-medium ">
@@ -25,7 +25,7 @@ export const ExpanationWidget = () => {
         </div>
       </div>
       <div className="flex flex-col gap-16 md:gap-20 ">
-        <img src="/bg/flywheel2.png" alt="" />
+        <img loading="lazy" src="/bg/flywheel2.png" alt="" />
         <div className="flex flex-col items-center h-full p-5 rounded-2xl bg-[var(--purple)] md:p-7">
           <h3 className="mb-2.5 text-xl text-center font-semibold">Phase 2: First Vault </h3>
           <p className=" text-center font-medium ">
@@ -35,7 +35,7 @@ export const ExpanationWidget = () => {
         </div>
       </div>
       <div className="flex flex-col gap-16 md:gap-20 ">
-        <img src="/bg/flywheel3.png" alt="" />
+        <img loading="lazy" src="/bg/flywheel3.png" alt="" />
         <div className="flex flex-col items-center h-full p-5 rounded-2xl bg-[var(--purple)] md:p-7">
           <h3 className="mb-2.5 text-xl text-center font-semibold">Phase 3: Multi-Vault Diversification</h3>
           <p className=" text-center font-medium ">

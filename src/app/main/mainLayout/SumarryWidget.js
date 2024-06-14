@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 export const SummaryWidget = () => {
     return (
         <section className="container-sm mt-20 md:pt-20 ">
-            <img src="/bg/VaultFi-wheel.png" alt="" className="scale-150 sm:scale-[1.2] py-20" />
+            <img loading="lazy" src="/bg/VaultFi-wheel.png" alt="" className="scale-150 sm:scale-[1.2] py-20" />
             <h2 className="mt-10 text-3xl font-semibold uppercase md:text-5xl italic">
                 VaultFi: Pioneering DeFi 3.0, with APY backed by revenue-generating businesses.
             </h2>
@@ -31,4 +31,4 @@ export const SummaryWidget = () => {
             </div>
         </section>
     );
-} 
+}

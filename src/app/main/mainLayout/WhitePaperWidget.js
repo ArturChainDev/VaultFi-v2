@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 export const WhitePaperWidget = () => {
   return (
     <section className="container-sm mt-20 md:pt-20">
@@ -15,7 +15,7 @@ export const WhitePaperWidget = () => {
         </a>
       </div>
       <div className="md:w-5/12">
-        <img src="/bg/whitepaper.png" alt="" />
+        <img loading="lazy" src="/bg/whitepaper.png" alt="" />
       </div>
     </div>
   </section>

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 export const RewardsWidget = () => {
     return (
         <section className="container mt-20 md:pt-20">
             <div className="flex flex-col items-center md:flex-row md:justify-between">
                 <div className="md:w-7/12">
-                    <img src="/bg/vault-bg.png" className="w-full scale-150 sm:scale-100 py-20 sm:py-0" />
+                    <img loading="lazy" src="/bg/vault-bg.png" className="w-full scale-150 sm:scale-100 py-20 sm:py-0" />
                 </div>
                 <div className="md:w-5/12 flex flex-col gap-4 md:gap-5">
                     <h3 className="text-3xl md:text-5xl mb-5 font-semibold uppercase text-white italic">DAILY STAKING REWARDS</h3>

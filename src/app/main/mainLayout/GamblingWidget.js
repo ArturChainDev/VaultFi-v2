@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 export const GamblingWidget = () => {
   return (
@@ -13,81 +13,81 @@ export const GamblingWidget = () => {
             <div className="flex gap-1 md:w-full">
               <div className="w-52 md:w-1/2"></div>
               <div className="compare-table-head">
-                <img src="/tokens/vaultfi.png" className="h-8" />
+                <img loading="lazy" src="/tokens/vaultfi.png" className="h-8" />
                 <span className="font-medium text-center whitespace-nowrap"> VaultFi </span>
               </div>
               <div className="compare-table-head">
-                <img src="/tokens/hex.png" className="h-8" />
+                <img loading="lazy" src="/tokens/hex.png" className="h-8" />
                 <span className="font-medium text-center whitespace-nowrap"> HEX </span>
               </div>
               <div className="compare-table-head">
-                <img src="/tokens/aave-aave-logo.png" className="h-8" />
+                <img loading="lazy" src="/tokens/aave-aave-logo.png" className="h-8" />
                 <span className="font-medium text-center whitespace-nowrap"> AAVE </span>
               </div>
               <div className="compare-table-head">
-                <img src="/tokens/ohm.png" className="h-8" />
+                <img loading="lazy" src="/tokens/ohm.png" className="h-8" />
                 <span className="font-medium text-center whitespace-nowrap"> OHM </span>
               </div>
               <div className="compare-table-head">
-                <img src="/tokens/time.png" className="h-8" />
+                <img loading="lazy" src="/tokens/time.png" className="h-8" />
                 <span className="font-medium text-center whitespace-nowrap"> TIME </span>
               </div>
             </div>
             <div className="flex gap-1 md:w-full">
               <div className="compare-table-row-head  md:w-1/2 rounded-tl-xl">Security Audit</div>
               <div className="compare-table-data highlight">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
 
               <div className="compare-table-data rounded-tr-xl">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
             </div>
             <div className="flex gap-1 md:w-full">
               <div className="compare-table-row-head  md:w-1/2">Economic Audit</div>
               <div className="compare-table-data highlight">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/x-mark.svg" className="h-11" />
+                <img loading="lazy" src="/x-mark.svg" className="h-11" />
               </div>
 
               <div className="compare-table-data">
-                <img src="/x-mark.svg" className="h-11" />
+                <img loading="lazy" src="/x-mark.svg" className="h-11" />
               </div>
             </div>
             <div className="flex gap-1 md:w-full">
               <div className="compare-table-row-head  md:w-1/2">Treasury-backed APY</div>
               <div className="compare-table-data highlight">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/x-mark.svg" className="h-11" />
+                <img loading="lazy" src="/x-mark.svg" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
 
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
             </div>
             <div className="flex gap-1 md:w-full">
@@ -95,39 +95,39 @@ export const GamblingWidget = () => {
                 Revenue-generating businesses to sustain the APY
               </div>
               <div className="compare-table-data highlight">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/x-mark.svg" className="h-11" />
+                <img loading="lazy" src="/x-mark.svg" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/x-mark.svg" className="h-11" />
+                <img loading="lazy" src="/x-mark.svg" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/x-mark.svg" className="h-11" />
+                <img loading="lazy" src="/x-mark.svg" className="h-11" />
               </div>
 
               <div className="compare-table-data">
-                <img src="/x-mark.svg" className="h-11" />
+                <img loading="lazy" src="/x-mark.svg" className="h-11" />
               </div>
             </div>
             <div className="flex gap-1 md:w-full">
               <div className="compare-table-row-head  md:w-1/2">Doxxed leadership</div>
               <div className="compare-table-data highlight">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
               <div className="compare-table-data">
-                <img src="/x-mark.svg" className="h-11" />
+                <img loading="lazy" src="/x-mark.svg" className="h-11" />
               </div>
 
               <div className="compare-table-data">
-                <img src="/checkmark.png" className="h-11" />
+                <img loading="lazy" src="/checkmark.png" className="h-11" />
               </div>
             </div>
             <div className="flex gap-1 md:w-full">

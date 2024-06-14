@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 export const TeammateWidget = () => {
   return (
     <section className="container-sm mt-20 md:mt-32 text-center team">
@@ -12,7 +12,7 @@ export const TeammateWidget = () => {
         <div className="md:w-1/2 lg:w-2/5">
           <div className="user_card text-center md:text-start">
             <div className="user_holder flex justify-center md:justify-start">
-              <img src="/bg/Matthias-Mazur.png" />
+              <img loading="lazy" src="/bg/Matthias-Mazur.png" />
             </div>
             <h3 className="font-bold text-3xl mt-6 mb-2 gold-text family-rubik">Matthias Mazur</h3>
             <h5 className="mb-8">Co-Founder. Fully doxxed.</h5>
@@ -33,7 +33,7 @@ export const TeammateWidget = () => {
         <div className="md:w-1/2 lg:w-2/5">
           <div className="user_card  text-center md:text-start">
             <div className="user_holder flex justify-center md:justify-start">
-              <img src="/bg/CaiusinabarreL.png" className="rounded-full" />
+              <img loading="lazy" src="/bg/CaiusinabarreL.png" className="rounded-full" />
             </div>
             <h3 className="font-bold text-3xl mt-6 mb-2 gold-text family-rubik">Caiusinabarrel</h3>
             <h5 className="mb-8">Co-Founder</h5>

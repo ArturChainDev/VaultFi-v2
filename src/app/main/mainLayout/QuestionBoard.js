@@ -12,7 +12,7 @@ export const QuestionBoard = ({ children, question, isDropDown, selectNumber, id
         >
           {question}
         </h3>
-        <img src="" />
+        <img loading="lazy" src="" />
         <div className='h-0 opacity-0 transition duration-1000 liner peer-focus:h-full focus:opacity-100 overflow-hidden'></div>
         { (oneDropDown && isDropDown) && <div>{children}</div>}
       </div>

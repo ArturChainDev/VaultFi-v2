@@ -18,7 +18,7 @@ const Root = styled('div')(({ theme }) => ({
 function Logo() {
   return (
     <Root className="flex items-center">
-      <img className="logo-icon" src="assets/images/logo/vault_logo.png" alt="logo" style={{ width: '200px'}}/>
+      <img loading="lazy" className="logo-icon" src="assets/images/logo/vault_logo.png" alt="logo" style={{ width: '200px'}}/>
 
       {/* <div
         className="badge flex items-center py-4 px-8 mx-8 rounded"

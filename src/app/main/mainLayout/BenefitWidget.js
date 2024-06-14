@@ -1,8 +1,4 @@
-import React from 'react';
-
-const BenefitImage = ({ src }) => {
-  return <img src={src} className="mb-5 w-36 md:w-48" />;
-};
+import React, { memo } from 'react';
 
 export const BenefitWidget = () => {
   return (
@@ -23,7 +19,7 @@ export const BenefitWidget = () => {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-stretch">
         <div className="flex flex-col gap-3 md:w-full">
           <div className="flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] lg:h-full lg:min-h-[480px]">
-            <img src="/freebies/shirt-hoodie-hat-sneekers-white.png" className="mb-5 w-40 md:w-56" />
+            <img loading="lazy" src="/freebies/shirt-hoodie-hat-sneekers-white.png" className="mb-5 w-40 md:w-56" />
             <h3 className="mb-2.5 text-lg text-center font-semibold">
               FREE "OG VaultFi VIP KIT" Hat + T-shirt + Hoodie + Sneakers
             </h3>
@@ -33,7 +29,7 @@ export const BenefitWidget = () => {
             </p>
           </div>
           <div className="hidden md:flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] lg:h-full lg:min-h-[480px]">
-            <img src="/freebies/shirt-hat-white.png" className="mb-5 w-40 md:w-56" />
+            <img loading="lazy" src="/freebies/shirt-hat-white.png" className="mb-5 w-40 md:w-56" />
             <h3 className="mb-2.5 text-lg text-center font-semibold"> FREE VaultFi T-shirt + Hat</h3>
             <p className="text-center font-medium ">
               When you buy over $1,000 in VaultFi tokens, you are eligible to receive the OG t-shirt and hat.
@@ -41,7 +37,7 @@ export const BenefitWidget = () => {
           </div>
           {/* $5000 offer, only in mobile */}
           <div className="flex md:hidden flex-col items-center p-5 rounded-2xl bg-[var(--purple)] lg:h-full lg:min-h-[480px]">
-            <img src="/freebies/shirt-hoodie-hat-white.png" className="mb-5 w-40 md:w-56" />
+            <img loading="lazy" src="/freebies/shirt-hoodie-hat-white.png" className="mb-5 w-40 md:w-56" />
             <h3 className="mb-2.5 text-lg text-center font-semibold">FREE "OG VaultFi" Hat + T-shirt + Hoodie</h3>
             <p className="text-center font-medium ">
               When you buy over $5,000 in VaultFi tokens, you are eligible to receive the "OG VaultFi" merchandise:
@@ -51,19 +47,19 @@ export const BenefitWidget = () => {
 
         </div>
         <div className="hidden md:flex items-center flex-shrink-0 px-10">
-          <img src="tokens/vaultfi.png" className="w-[150px] m-auto" />
+          <img loading="lazy" src="tokens/vaultfi.png" className="w-[150px] m-auto" />
         </div>
         <div className="flex flex-col gap-3 md:w-full">
           {/* $1000 offer, only in mobile */}
           <div className="flex md:hidden flex-col items-center p-5 rounded-2xl bg-[var(--purple)] lg:h-full lg:min-h-[480px]">
-            <img src="/freebies/shirt-hat-white.png" className="mb-5 w-40 md:w-56" />
+            <img loading="lazy" src="/freebies/shirt-hat-white.png" className="mb-5 w-40 md:w-56" />
             <h3 className="mb-2.5 text-lg text-center font-semibold"> FREE VaultFi T-shirt + Hat</h3>
             <p className="text-center font-medium ">
               When you buy over $1,000 in VaultFi tokens, you are eligible to receive the OG t-shirt and hat.
             </p>
           </div>
           <div className="hidden md:flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] lg:h-full lg:min-h-[480px]">
-            <img src="/freebies/shirt-hoodie-hat-white.png" className="mb-5 w-40 md:w-56" />
+            <img loading="lazy" src="/freebies/shirt-hoodie-hat-white.png" className="mb-5 w-40 md:w-56" />
             <h3 className="mb-2.5 text-lg text-center font-semibold">FREE "OG VaultFi" Hat + T-shirt + Hoodie</h3>
             <p className="text-center font-medium ">
               When you buy over $5,000 in VaultFi tokens, you are eligible to receive the "OG VaultFi" merchandise:
@@ -71,7 +67,7 @@ export const BenefitWidget = () => {
             </p>
           </div>
           <div className="flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] lg:h-full lg:min-h-[480px]">
-            <img src="/freebies/hat-white.png" className="mb-5 w-40 md:w-56" />
+            <img loading="lazy" src="/freebies/hat-white.png" className="mb-5 w-40 md:w-56" />
             <h3 className="mb-2.5 text-lg text-center font-semibold"> FREE VaultFi Hat</h3>
             <p className="text-center font-medium ">
               When you buy over $500 in VaultFi tokens, you are eligible to receive the "OG" hat.

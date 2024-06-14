@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 export const GuideWidget = () => {
   return (
@@ -7,8 +7,8 @@ export const GuideWidget = () => {
         HOW TO BUY VAULTFI GUIDE
       </h3>
 
-      <img src="/bg/buy-steps-desktop.svg" alt="" className="hidden md:block mx-auto" useMap="#desktopToBuy" />
-      <img src="/bg/buy-steps-mobile.svg" alt="" className="md:hidden mx-auto" useMap="#mobileToBuy" />
+      <img loading="lazy" src="/bg/buy-steps-desktop.svg" alt="" className="hidden md:block mx-auto" useMap="#desktopToBuy" />
+      <img loading="lazy" src="/bg/buy-steps-mobile.svg" alt="" className="md:hidden mx-auto" useMap="#mobileToBuy" />
 
       {/* Maps to allow links to be clickable in image */}
 

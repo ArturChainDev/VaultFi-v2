@@ -59,9 +59,9 @@ function PresaleWidget(props) {
   const [refCode, setRefCode] = useState("");
   const [referrer, setReferrer] = useState(ZERO_ADDR);
 
-  const [inputTokens, setInputTokens] = useState(1000000);
+  const [inputTokens, setInputTokens] = useState(1000 / TOKEN_PRICE);
   const [priceForTokens, setPriceForTokens] = useState(
-    1000000 * TOKEN_PRICE
+    1000
   );
 
   const [isOGRound, setIsOGRound] = useState(false);
@@ -290,22 +290,26 @@ function PresaleWidget(props) {
   const handleInputTokens = (event) => {
     try {
       const value = event.target.value;
-      if (tokenType === 3) {
-        setInputTokens(value);
-        const usdc = calculateUSDC(value)
-        const usdcInSmallestUnit = usdc;
-        // toBigNum(usdc, 0);
-        const ethAmount = (usdcInSmallestUnit / ethPriceInUsdc).toFixed(9);
-        setPriceForTokens(ethAmount);
-        return;
-      }
-      if (
-        /^\d*$/.test(value) &&
-        (parseInt(value, 10) >= MIN_TOKEN_VALUE ||
-          parseInt(value, 10) <= maxAllocation)
-      ) {
-        setInputTokens(value);
-        setPriceForTokens(calculateUSDC(value));
+      if (value === "") {
+        setPriceForTokens(0);
+      } else {
+        if (tokenType === 3) {
+          setInputTokens(value);
+          const usdc = calculateUSDC(value)
+          const usdcInSmallestUnit = usdc;
+          // toBigNum(usdc, 0);
+          const ethAmount = (usdcInSmallestUnit / ethPriceInUsdc).toFixed(9);
+          setPriceForTokens(ethAmount);
+          return;
+        }
+        if (
+          /^\d*$/.test(value) &&
+          (parseInt(value, 10) >= MIN_TOKEN_VALUE ||
+            parseInt(value, 10) <= maxAllocation)
+        ) {
+          setInputTokens(value);
+          setPriceForTokens(calculateUSDC(value));
+        }
       }
     } catch (error) {
       console.log(error);
@@ -332,11 +336,11 @@ function PresaleWidget(props) {
   const selectTokenType = (number) => {
     setTokenType(Number(number));
     if (number === 3) {
-      setPriceForTokens(0.217);
-      setInputTokens(1000000);
+      setPriceForTokens(1);
+      setInputTokens(4600000);
     } else {
-      setPriceForTokens(800);
-      setInputTokens(1000000);
+      setPriceForTokens(1000);
+      setInputTokens(1250000);
     }
   }
 
@@ -629,11 +633,11 @@ function PresaleWidget(props) {
 
   const switchImage = (tokenType) => {
     if (tokenType === 1) {
-      return <img src="/tokens/usdc.webp" alt="USDC" className="object-contain w-4 h-4" />
+      return <img loading="lazy" src="/tokens/usdc.webp" alt="USDC" className="object-contain w-4 h-4" />
     } else if (tokenType === 2) {
-      return <img src="/tokens/usdt.svg" alt="USDT" className="object-contain w-4 h-4" />
+      return <img loading="lazy" src="/tokens/usdt.svg" alt="USDT" className="object-contain w-4 h-4" />
     } else if (tokenType === 3) {
-      return <img src="/tokens/eth.svg" alt="ETH" className="object-contain w-4 h-4" />
+      return <img loading="lazy" src="/tokens/eth.svg" alt="ETH" className="object-contain w-4 h-4" />
     }
   };
 
@@ -689,7 +693,7 @@ function PresaleWidget(props) {
                       onClick={() => selectTokenType(Number(3))}
                       className={`p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 ${tokenType === 3 ? "bg-[var(--gold)]" : "bg-white/10"}`}>
                       <div className="relative flex">
-                        <img src="/tokens/eth.svg" alt="ETH" className="object-contain w-4 h-4" />
+                        <img loading="lazy" src="/tokens/eth.svg" alt="ETH" className="object-contain w-4 h-4" />
                       </div>
                       ETH
                     </button>
@@ -697,7 +701,7 @@ function PresaleWidget(props) {
                       onClick={() => selectTokenType(Number(2))}
                       className={`p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 ${tokenType === 2 ? "bg-[var(--gold)]" : "bg-white/10"}`}>
                       <div className="relative flex">
-                        <img src="/tokens/usdt.svg" alt="USDT" className="object-contain w-4 h-4" />
+                        <img loading="lazy" src="/tokens/usdt.svg" alt="USDT" className="object-contain w-4 h-4" />
                         <img
                           className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border-1 border-[var(--gold)]"
                           src="/tokens/ethereum.svg"
@@ -709,7 +713,7 @@ function PresaleWidget(props) {
                       onClick={() => selectTokenType(Number(1))}
                       className={`p-2.5 flex gap-2.5 items-center justify-center hover:opacity-75 ${tokenType === 1 ? "bg-[var(--gold)]" : "bg-white/10"}`}>
                       <div className="relative flex">
-                        <img src="/tokens/usdc.webp" alt="USDC" className="object-contain w-4 h-4" />
+                        <img loading="lazy" src="/tokens/usdc.webp" alt="USDC" className="object-contain w-4 h-4" />
                         <img
                           className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border-1 border-[var(--gold)]"
                           src="/tokens/ethereum.svg"
@@ -755,7 +759,7 @@ function PresaleWidget(props) {
                     className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center pr-5">
-                    <img src="/tokens/vaultfi.png" alt="HPLT" className="object-contain w-6 h-6" />
+                    <img loading="lazy" src="/tokens/vaultfi.png" alt="HPLT" className="object-contain w-6 h-6" />
                   </div>
                 </div>
               </div>
@@ -764,7 +768,7 @@ function PresaleWidget(props) {
             {/*  */}
             < div className="flex flex-col justify-center items-center w-full" >
               <div className="flex w-6 mb-1.5">
-                <img src="/tokens/vaultfi.png" className="h-full" />
+                <img loading="lazy" src="/tokens/vaultfi.png" className="h-full" />
               </div>
               <div className="text-center text-xs ">
                 In order to buy VaultFi tokens, please confirm the transaction in your wallet. You may need to check
@@ -793,10 +797,10 @@ function PresaleWidget(props) {
         </div>
 
         <div className="md:w-2/3  h-fit md:hidden scale-[1.15] sm:scale-100 py-20 sm:py-0">
-          <img src="/graph-mobile.jpg" />
+          <img loading="lazy" src="/graph-mobile.jpg" />
         </div>
         <div className="md:w-2/3 hidden rounded-[16px] p-3 dark-blue-bg md:block h-fit">
-          <img src="/graph.jpg" />
+          <img loading="lazy" src="/graph.jpg" />
         </div>
       </div >
     </section >

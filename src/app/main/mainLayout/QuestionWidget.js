@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo } from 'react';
 import { QuestionSection } from './QuestionSection';
 
 export const QuestionWidget = () => {
@@ -14,3 +14,4 @@ export const QuestionWidget = () => {
     </section>
   );
 };
+
