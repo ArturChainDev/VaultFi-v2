@@ -167,7 +167,7 @@ function PresaleWidget(props) {
     if (_isPublicRound) {
 
       let _publicRowRoundTokenLimited;
-      [ _publicRowRoundTokenLimited, _totalRowTokensRequested] = await Promise.all([
+      [_publicRowRoundTokenLimited, _totalRowTokensRequested] = await Promise.all([
         presaleContract.getPublicRoundTokenLimited(),
         presaleContract.totalTokensRequested(),
       ])
@@ -287,27 +287,21 @@ function PresaleWidget(props) {
 
   const handleInputTokens = (event) => {
     try {
-      const value = event.target.value;
+      let value = event.target.value;
+      value = value.replace(/^0+/, '');
+      event.target.value = value;
+      console.log("tokenValue", Number(value))
+      setInputTokens(Number(value));
       if (value === "") {
         setPriceForTokens(0);
+      } else if (tokenType === 3) {
+        const usdc = calculateUSDC(Number(value))
+        const usdcInSmallestUnit = usdc;
+        // toBigNum(usdc, 0);
+        const ethAmount = (usdcInSmallestUnit / ethPriceInUsdc).toFixed(9);
+        setPriceForTokens(ethAmount);
       } else {
-        if (tokenType === 3) {
-          setInputTokens(value);
-          const usdc = calculateUSDC(value)
-          const usdcInSmallestUnit = usdc;
-          // toBigNum(usdc, 0);
-          const ethAmount = (usdcInSmallestUnit / ethPriceInUsdc).toFixed(9);
-          setPriceForTokens(ethAmount);
-          return;
-        }
-        if (
-          /^\d*$/.test(value) &&
-          (parseInt(value, 10) >= MIN_TOKEN_VALUE ||
-            parseInt(value, 10) <= maxAllocation)
-        ) {
-          setInputTokens(value);
-          setPriceForTokens(calculateUSDC(value));
-        }
+        setPriceForTokens(calculateUSDC(Number(value)));
       }
     } catch (error) {
       console.log(error);
@@ -316,12 +310,15 @@ function PresaleWidget(props) {
 
   const handleInputPrice = (event) => {
     try {
-      const value = event.target.value;
+      let value = event.target.value;
+      value = value.replace(/^0+/, '');
+      event.target.value = value;
+      console.log("priceValue", Number(value))
       setPriceForTokens(Number(value));
       if (value === "") {
         setInputTokens(0);
       } else if (tokenType === 3) {
-        const usdc = ethPriceInUsdc * value;
+        const usdc = ethPriceInUsdc * Number(value);
         setInputTokens(toBigNum(usdc, 18).div(toBigNum(TOKEN_PRICE, 18)))
       } else {
         setInputTokens(toBigNum(value, 6).div(toBigNum(TOKEN_PRICE, 6)))
@@ -651,7 +648,7 @@ function PresaleWidget(props) {
             VaultFinance is revolutionizing DeFi (Decentralized Finance), with APY backed by revenue-generating
             businesses.
             <span className="font-semibold text-white">
-              VaultFi has undergone 2 security audits, 1 economic audit, and is led by a doxxed team.
+              &nbsp;VaultFi has undergone 2 security audits, 1 economic audit, and is led by a doxxed team.
             </span>
           </p>
         </div>
@@ -665,10 +662,10 @@ function PresaleWidget(props) {
             <div className="amount-raised">
               {/* {`$${formatNumberWithCommas(totalTokensRequested * TOKEN_PRICE)}`} */}
               $547,140
-              </div>
+            </div>
             {/* Raise Progress bar */}
             <div className="raise-goal">
-              <span> 
+              <span>
                 {/* {calculateRateOfProgressBar()} */}
                 91.19% of minimum goal raised</span>
               <div className="progress">
@@ -734,12 +731,11 @@ function PresaleWidget(props) {
             < div className="space-y-2 w-full" >
               <div className="space-y-2">
                 <label htmlFor="from-token" className="text-[11px] font-semibold uppercase ">
-                  {" "}
-                  Amount in <span className="text-primary">ETH</span> you pay{" "}
+                  Amount in <span className="text-primary">ETH</span> you pay
                 </label>
                 <div className="relative">
                   <input
-                    value={priceForTokens}
+                    value={Number(priceForTokens)}
                     onChange={handleInputPrice}
                     type="number"
                     className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
@@ -751,12 +747,11 @@ function PresaleWidget(props) {
               </div>
               <div className="space-y-2">
                 <label htmlFor="from-token" className="flex flex-wrap text-[11px] font-semibold uppercase ">
-                  {" "}
                   VaultFi token amount you receive
                 </label>
                 <div className="relative">
                   <input
-                    value={inputTokens}
+                    value={Number(inputTokens)}
                     onChange={handleInputTokens}
                     type="number"
                     className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
