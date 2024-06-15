@@ -290,7 +290,7 @@ function PresaleWidget(props) {
       let value = event.target.value;
       value = value.replace(/^0+/, '');
       event.target.value = value;
-      console.log("tokenValue", Number(value))
+      if (value.includes('.')) event.target.value = "0" + value;
       setInputTokens(Number(value));
       if (value === "") {
         setPriceForTokens(0);
@@ -313,7 +313,7 @@ function PresaleWidget(props) {
       let value = event.target.value;
       value = value.replace(/^0+/, '');
       event.target.value = value;
-      console.log("priceValue", Number(value))
+      if (value.includes('.')) event.target.value = "0" + value;
       setPriceForTokens(Number(value));
       if (value === "") {
         setInputTokens(0);
