@@ -288,19 +288,34 @@ function PresaleWidget(props) {
   const handleInputTokens = (event) => {
     try {
       let value = event.target.value;
-      value = value.replace(/^0+/, '');
-      event.target.value = value;
-      if (value.includes('.')) event.target.value = "0" + value;
-      setInputTokens(Number(value));
+      // value = value.replace(/^0+/, '');
       if (value === "") {
+        event.target.value = 0
         setPriceForTokens(0);
-      } else if (tokenType === 3) {
+        setInputTokens(0);
+        return
+      }
+      if (value.includes('.')) {
+        // Split the value into integer and decimal parts
+        let parts = value.split('.');
+        // Parse the integer part to remove leading zeros
+        parts[0] = parts[0] === "" ? "" : parseInt(parts[0], 10).toString();;
+        // Join the parts back together
+        value = parts.join('.');
+      } else {
+        // Parse the value as an integer to remove leading zeros
+        value = parseInt(value, 10).toString();
+      }
+      event.target.value = value;
+      if (tokenType === 3) {
+        setInputTokens(Number(value));
         const usdc = calculateUSDC(Number(value))
         const usdcInSmallestUnit = usdc;
         // toBigNum(usdc, 0);
         const ethAmount = (usdcInSmallestUnit / ethPriceInUsdc).toFixed(9);
         setPriceForTokens(ethAmount);
       } else {
+        setInputTokens(Number(value));
         setPriceForTokens(calculateUSDC(Number(value)));
       }
     } catch (error) {
@@ -311,16 +326,34 @@ function PresaleWidget(props) {
   const handleInputPrice = (event) => {
     try {
       let value = event.target.value;
-      value = value.replace(/^0+/, '');
-      event.target.value = value;
-      if (value.includes('.')) event.target.value = "0" + value;
-      setPriceForTokens(Number(value));
+      // value = value.replace(/^0+/, '');
       if (value === "") {
+        event.target.value = 0
+        setPriceForTokens(0);
         setInputTokens(0);
-      } else if (tokenType === 3) {
+        return
+      } 
+
+      if (value.includes('.')) {
+        // Split the value into integer and decimal parts
+        let parts = value.split('.');
+        // Parse the integer part to remove leading zeros
+        parts[0] = parts[0] === "" ? "" : parseInt(parts[0], 10).toString();;
+        // Join the parts back together
+        value = parts.join('.');
+        console.log("1",value);
+      } else {
+        // Parse the value as an integer to remove leading zeros
+        value = parseInt(value, 10).toString();
+        console.log("2",value);
+      }
+      event.target.value = value
+      if (tokenType === 3) {
+        setPriceForTokens(Number(value));
         const usdc = ethPriceInUsdc * Number(value);
         setInputTokens(toBigNum(usdc, 18).div(toBigNum(TOKEN_PRICE, 18)))
       } else {
+        setPriceForTokens(Number(value));
         setInputTokens(toBigNum(value, 6).div(toBigNum(TOKEN_PRICE, 6)))
       }
     } catch (error) {
