@@ -290,23 +290,23 @@ function PresaleWidget(props) {
       let value = event.target.value;
       // value = value.replace(/^0+/, '');
       if (value === "") {
-        event.target.value = 0
-        setPriceForTokens(0);
-        setInputTokens(0);
+        event.target.value = ""
+        setPriceForTokens("");
+        setInputTokens("");
         return
       }
-      if (value.includes('.')) {
-        // Split the value into integer and decimal parts
-        let parts = value.split('.');
-        // Parse the integer part to remove leading zeros
-        parts[0] = parts[0] === "" ? "" : parseInt(parts[0], 10).toString();;
-        // Join the parts back together
-        value = parts.join('.');
-      } else {
-        // Parse the value as an integer to remove leading zeros
-        value = parseInt(value, 10).toString();
-      }
-      event.target.value = value;
+      // if (value.includes('.')) {
+      //   // Split the value into integer and decimal parts
+      //   let parts = value.split('.');
+      //   // Parse the integer part to remove leading zeros
+      //   parts[0] = parts[0] === "" ? "" : parseInt(parts[0], 10).toString();;
+      //   // Join the parts back together
+      //   value = parts.join('.');
+      // } else {
+      //   // Parse the value as an integer to remove leading zeros
+      //   value = parseInt(value, 10).toString();
+      // }
+      // event.target.value = value;
       if (tokenType === 3) {
         setInputTokens(Number(value));
         const usdc = calculateUSDC(Number(value))
@@ -328,26 +328,26 @@ function PresaleWidget(props) {
       let value = event.target.value;
       // value = value.replace(/^0+/, '');
       if (value === "") {
-        event.target.value = 0
-        setPriceForTokens(0);
-        setInputTokens(0);
+        event.target.value = ""
+        setPriceForTokens("");
+        setInputTokens("");
         return
-      } 
-
-      if (value.includes('.')) {
-        // Split the value into integer and decimal parts
-        let parts = value.split('.');
-        // Parse the integer part to remove leading zeros
-        parts[0] = parts[0] === "" ? "" : parseInt(parts[0], 10).toString();;
-        // Join the parts back together
-        value = parts.join('.');
-        console.log("1",value);
-      } else {
-        // Parse the value as an integer to remove leading zeros
-        value = parseInt(value, 10).toString();
-        console.log("2",value);
       }
-      event.target.value = value
+
+      // if (value.includes('.')) {
+      //   // Split the value into integer and decimal parts
+      //   let parts = value.split('.');
+      //   // Parse the integer part to remove leading zeros
+      //   parts[0] = parts[0] === "" ? "" : parseInt(parts[0], 10).toString();;
+      //   // Join the parts back together
+      //   value = parts.join('.');
+      //   console.log("1",value);
+      // } else {
+      //   // Parse the value as an integer to remove leading zeros
+      //   value = parseInt(value, 10).toString();
+      //   console.log("2",value);
+      // }
+      // event.target.value = value
       if (tokenType === 3) {
         setPriceForTokens(Number(value));
         const usdc = ethPriceInUsdc * Number(value);
@@ -391,7 +391,9 @@ function PresaleWidget(props) {
     // setInputTokens(Math.round(inputTokens / STEP) * STEP);
     //   return;
     // }
-
+    if (inputTokens == "", priceForTokens == "") {
+      return
+    }
     if (inputTokens < 1000000) {
       dispatch(
         showMessage({
@@ -768,7 +770,7 @@ function PresaleWidget(props) {
                 </label>
                 <div className="relative">
                   <input
-                    value={Number(priceForTokens)}
+                    value={priceForTokens}
                     onChange={handleInputPrice}
                     type="number"
                     className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
@@ -784,7 +786,7 @@ function PresaleWidget(props) {
                 </label>
                 <div className="relative">
                   <input
-                    value={Number(inputTokens)}
+                    value={inputTokens}
                     onChange={handleInputTokens}
                     type="number"
                     className="w-full p-5 pr-16 bg-transparent border rounded-lg border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
