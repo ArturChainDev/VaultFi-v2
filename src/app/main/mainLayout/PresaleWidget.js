@@ -662,14 +662,19 @@ function PresaleWidget(props) {
           {/* Buy token / Connect wallet form  */}
           <div className="rounded-[16px] dark-blue-bg p-8 flex flex-col gap-2 items-center">
             {/* Amount Raised */}
-            <div className="amount-raised">{`$${formatNumberWithCommas(totalTokensRequested * TOKEN_PRICE)}`}</div>
+            <div className="amount-raised">
+              {/* {`$${formatNumberWithCommas(totalTokensRequested * TOKEN_PRICE)}`} */}
+              $547,140
+              </div>
             {/* Raise Progress bar */}
             <div className="raise-goal">
-              <span> {calculateRateOfProgressBar()}% of minimum goal raised</span>
+              <span> 
+                {/* {calculateRateOfProgressBar()} */}
+                91.19% of minimum goal raised</span>
               <div className="progress">
-                <div style={{ width: `${calculateRateOfProgressBar()}%` }}></div>
+                <div style={{ width: `91.19%` }}></div>
               </div>
-              <span className="text-end">$1,200,000</span>
+              <span className="text-end">$600,000</span>
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-lg font-semibold text-center text-white">🔥 2631 Visitors in the last 24h</p>

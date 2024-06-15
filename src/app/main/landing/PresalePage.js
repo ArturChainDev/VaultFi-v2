@@ -35,7 +35,7 @@ const PresalePage = () => {
     }
   }, [])
   return (
-    <main className="md:px-4 pt-2 md:pt-4 pb-5">
+    <main className="m-auto md:px-4 pt-2 md:pt-4 pb-5">
       <Header />
       <PresaleWidget />
       <SecureWidget />
