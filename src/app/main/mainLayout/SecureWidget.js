@@ -29,20 +29,18 @@ export const SecureWidget = () => {
               <img loading="lazy" src="/bg/yale.png" alt="" className="h-8" />
             </div>
           </div>
-          <div className="flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] md:p-7 lg:w-1/5 w-full h-auto">
-            <div className="md:h-[180px] flex items-center">
-              {" "}
+          <div className="flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] md:pt-10 md:p-3 lg:w-1/5 w-full h-auto">
+            <div className="md:h-[200px] md:pt-6 md:pb-10 flex items-center">
               <img loading="lazy" src="/bg/certik.png" className="mb-5 w-36 md:w-40" />
             </div>
-            <h3 className="mb-2.5 text-xl text-center font-semibold">Audited by Certik</h3>
+            <h3 className="mb-2.5 md:pt-9 text-xl text-center font-semibold">Audited by Certik</h3>
             <p className=" text-center font-medium  family-poppins">VaultFi has been fully audited by Certik.</p>
           </div>
-          <div className="flex flex-col items-center  p-5 rounded-2xl bg-[var(--purple)] md:p-7 lg:w-1/5 w-full h-auto">
-            <div className="md:h-[180px] flex items-center">
-              {" "}
+          <div className="flex flex-col items-center  p-5 rounded-2xl bg-[var(--purple)] md:pt-10 md:p-3 lg:w-1/5 w-full h-auto">
+            <div className="md:h-[200px]  md:pt-6 md:pb-10 flex items-center">
               <img loading="lazy" src="/bg/peckshield.png" className="mb-5 h-14 block mx-auto" />{" "}
             </div>
-            <h3 className="mb-2.5 text-xl text-center font-semibold"> Audited by PeckShield </h3>
+            <h3 className="mb-2.5 md:pt-8 text-xl text-center font-semibold"> Audited by PeckShield </h3>
             <p className=" text-center font-medium  family-poppins">
               VaultFi has been fully audited by PeckShield.
             </p>

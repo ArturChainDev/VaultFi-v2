@@ -374,7 +374,7 @@ function ReferralWidget(props) {
       </div>
       <div className='flex justify-between'>
         <p className="font-medium max-w-[200px] md:max-w-full">Free bonus tokens earned via referrals</p>
-        <p className="font-medium text-[var(--green)]">0</p>
+        <p className="font-medium text-[var(--green)]">{formatNumberWithCommas(0)}</p>
       </div>
       <button className="btn connect_wallet_btn text-center justify-center" onClick={() => disconnect()}>
         Disconnect

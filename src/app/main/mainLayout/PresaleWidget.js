@@ -840,7 +840,7 @@ function PresaleWidget(props) {
           <div className="hidden rounded-[16px] p-3 dark-blue-bg md:block h-fit">
             <img loading="lazy" src="/graph.jpg" />
           </div>
-          <div className="text-left border border-[var(--gold)] border-4 p-2 ">
+          <div className="text-left border border-[var(--gold)] md:pt-2 pt-10 border-4 p-2 ">
             <h3 className="mb-2.5 text-xl font-semibold">Follow these steps to buy</h3>
             <p className="font-medium">
               <span className="underline text-lg font-semibold">Step 1</span>: Click on "Connect Wallet".

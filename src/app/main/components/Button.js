@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import ReferralWidget from "../widgets/ReferralWidget"
+import {
+    formatNumberWithCommas,
+    convertSecondsToDate,
+  } from "src/app/services/utils.service.js";
 
 export const ButtonTop = ({ onClick, children }) => {
     return (
@@ -67,27 +71,27 @@ export const ButtonHover = ({ children }) => {
                 <p className="text-center font-semibold">1 VaultFi token = $0.0008</p>
                 <div className='flex justify-between'>
                     <p className="font-semibold max-w-[200px] md:max-w-full pr-3">VaultFi tokens in wallet</p>
-                    <p className="font-medium  text-[var(--green)]">{tokenAmount}</p>
+                    <p className="font-medium  text-[var(--green)]">{formatNumberWithCommas(tokenAmount)}</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className="font-semibold max-w-[200px] md:max-w-full pr-3">Profit on launch</p>
-                    <p className="font-medium text-[var(--green)]">{profitAmount} USD</p>
+                    <p className="font-medium text-[var(--green)]">{formatNumberWithCommas(profitAmount)} USD</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className="font-semibold max-w-[200px] md:max-w-full pr-3">Profit on launch if token price does a 5x</p>
-                    <p className="font-medium text-[var(--green)]">{profitAmount * 5} USD</p>
+                    <p className="font-medium text-[var(--green)]">{formatNumberWithCommas(profitAmount * 5)} USD</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className="font-semibold max-w-[200px] md:max-w-full pr-3">Profit if VaultFi reaches $500M market cap</p>
-                    <p className="font-medium text-[var(--green)]">{profitAmount * 111} USD</p>
+                    <p className="font-medium text-[var(--green)]">{formatNumberWithCommas(profitAmount * 111)} USD</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className="font-semibold max-w-[200px] md:max-w-full pr-3">Profit if VaultFi reaches $1B market cap</p>
-                    <p className="font-medium text-[var(--green)]">{profitAmount * 222} USD</p>
+                    <p className="font-medium text-[var(--green)]">{formatNumberWithCommas(profitAmount * 222)} USD</p>
                 </div>
                 <div className='flex justify-between'>
                     <p className="font-semibold max-w-[200px] md:max-w-full pr-3">Profit if VaultFi reaches $5B market cap ($1 per token)</p>
-                    <p className="font-medium text-[var(--green)]">{profitAmount * 1110} USD</p>
+                    <p className="font-medium text-[var(--green)]">{formatNumberWithCommas(profitAmount * 1110)} USD</p>
                 </div>
                 <ReferralWidget />
             </div>
