@@ -3,6 +3,7 @@ import fuse from './fuse';
 import i18n from './i18nSlice';
 import user from './userSlice';
 import updateFlag from './updateFlagSlice';
+import setToken from './tokenAmountSlice';
 
 const createReducer = (asyncReducers) => (state, action) => {
   const combinedReducer = combineReducers({
@@ -10,6 +11,7 @@ const createReducer = (asyncReducers) => (state, action) => {
     i18n,
     user,
     updateFlag,
+    setToken,
     ...asyncReducers,
   });
 

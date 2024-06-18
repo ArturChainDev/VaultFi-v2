@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { ThemeProvider } from "@mui/material/styles";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { ButtonTop, ButtonBottom } from '../components/Button';
+import { ButtonTop, ButtonBottom, ButtonHover } from '../components/Button';
 import { useSelector } from "react-redux";
 
 import {
@@ -75,8 +75,8 @@ export const Header = () => {
 
                     return (
                       <ThemeProvider theme={toolbarTheme}>
-                        <div style={{ display: "flex", gap: 12 }}>
-                          <ButtonTop
+                        {/* <div style={{ display: "flex", gap: 12 }}> */}
+                        {/* <ButtonTop
                             onClick={openChainModal}
                             sx={{ display: "flex", alignItems: "center" }}
                           >
@@ -101,14 +101,11 @@ export const Header = () => {
                               </div>
                             )}
                             {chain.name}
-                          </ButtonTop>
-
-                          {/* <ButtonTop
-                              onClick={openAccountModal}
-                            >
-                              {account.displayName}
-                            </ButtonTop> */}
+                          </ButtonTop> */}
+                        <div className="md:hidden flex">
+                          <ButtonHover />
                         </div>
+                        {/* </div> */}
                       </ThemeProvider>
                     );
                   })()}
@@ -218,12 +215,11 @@ export const Header = () => {
                           )}
                           {chain.name}
                         </ButtonBottom>
-
-                        <ButtonBottom
-                          onClick={openAccountModal}
-                        >
-                          {account.displayName}
-                        </ButtonBottom>
+                        <div className="md:flex hidden"> 
+                          <ButtonHover>
+                            {account.displayName}
+                          </ButtonHover>
+                        </div>
                       </div>
                     </ThemeProvider>
                   );

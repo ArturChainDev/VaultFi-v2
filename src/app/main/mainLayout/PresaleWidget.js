@@ -18,6 +18,7 @@ import {
 import Alert from "@mui/material/Alert";
 import { useAccount } from "wagmi";
 import { showMessage } from "app/store/fuse/messageSlice";
+import { updateToken, updateBonusToken } from "app/store/tokenAmountSlice";
 import {
   formatNumberWithCommas,
   convertSecondsToDate,
@@ -249,11 +250,15 @@ function PresaleWidget(props) {
     let _tokenRequested = fromBigNum(
       await presaleContract.getTokensRequestedOfWallet(address)
     );
+    console.log("_tokenRequested", _tokenRequested);
+    dispatch(updateToken(_tokenRequested));
     setTokenRequested(_tokenRequested);
 
     let _bonusRequested = fromBigNum(
       await presaleContract.getBonusRequested(address)
     );
+    console.log("_bonusRequested", _bonusRequested);
+    dispatch(updateBonusToken(_bonusRequested));
     setBonusRequested(_bonusRequested);
 
     let _totalTokensRequested = fromBigNum(
@@ -828,12 +833,25 @@ function PresaleWidget(props) {
             }
           </div>
         </div>
-
-        <div className="md:w-2/3  h-fit md:hidden scale-[1.15] sm:scale-100 py-20 sm:py-0">
-          <img loading="lazy" src="/graph-mobile.jpg" />
-        </div>
-        <div className="md:w-2/3 hidden rounded-[16px] p-3 dark-blue-bg md:block h-fit">
-          <img loading="lazy" src="/graph.jpg" />
+        <div className="md:w-2/3 flex flex-col justify-between">
+          <div className="h-fit md:hidden scale-[1.15] sm:scale-100 py-20 sm:py-0">
+            <img loading="lazy" src="/graph-mobile.jpg" />
+          </div>
+          <div className="hidden rounded-[16px] p-3 dark-blue-bg md:block h-fit">
+            <img loading="lazy" src="/graph.jpg" />
+          </div>
+          <div className="text-left border border-[var(--gold)] border-4 p-2 ">
+            <h3 className="mb-2.5 text-xl font-semibold">Follow these steps to buy</h3>
+            <p className="font-medium">
+              <span className="underline text-lg font-semibold">Step 1</span>: Click on "Connect Wallet".
+            </p>
+            <p className="font-medium">
+              <span className="underline text-lg font-semibold">Step 2</span>: Once your wallet is connected, select the number of tokens you wish to purchase.
+            </p>
+            <p className="font-medium">
+              <span className="underline text-lg font-semibold">Step 3</span>: Create your referral code and share it with others to receive 5% in bonus extra tokens.
+            </p>
+          </div>
         </div>
       </div >
     </section >

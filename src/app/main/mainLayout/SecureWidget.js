@@ -5,7 +5,8 @@ export const SecureWidget = () => {
       <div className="flex flex-col gap-5 md:gap-10 ">
         <h2 className="text-center text-3xl mb-5 font-semibold uppercase md:text-5xl italic">
           {" "}
-          2 Security Audits. 1 Economic Audit.{" "}
+          2 Security Audits.
+          <br className="md:hidden flex"/> 1 Economic Audit.{" "}
         </h2>
         <div className="flex flex-wrap gap-3 md:gap-5 md:flex-nowrap">
           <div className="flex flex-col items-center p-5 rounded-2xl bg-[var(--purple)] md:p-7 lg:w-3/5">

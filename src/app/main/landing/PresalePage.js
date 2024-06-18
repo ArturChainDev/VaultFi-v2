@@ -21,11 +21,11 @@ const PresalePage = () => {
 
     const modifyHeader = () => {
       if (window.scrollY) {
-        document.getElementById('header-socials').classList.add('!hidden');
-        document.getElementById('mobile-nav-btn').classList.remove('!px-4', '!py-3.5')
+        document.getElementById('header-socials') && document.getElementById('header-socials').classList.add('!hidden');
+        document.getElementById('mobile-nav-btn') && document.getElementById('mobile-nav-btn').classList.remove('!px-4', '!py-3.5')
       } else {
-        document.getElementById('header-socials').classList.remove('!hidden')
-        document.getElementById('mobile-nav-btn').classList.add('!px-4', '!py-3.5')
+        document.getElementById('mheader-socials') && document.getElementById('header-socials').classList.remove('!hidden')
+        document.getElementById('mobile-nav-btn') && document.getElementById('mobile-nav-btn').classList.add('!px-4', '!py-3.5')
       }
     }
     document.addEventListener('scroll', modifyHeader)

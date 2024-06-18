@@ -17,16 +17,17 @@ import {
   getContract,
   fromBigNum,
 } from "src/app/services/web3.service";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import PresaleData from "src/abis/Presale.json";
 import { showMessage } from "app/store/fuse/messageSlice";
 import { formatNumberWithCommas } from "src/app/services/utils.service.js";
 
 function ReferralWidget(props) {
-  const theme = useTheme();
   const updateFlag = useSelector((state) => state.updateFlag.value);
   const dispatch = useDispatch();
   const { address, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
+  const [copyState, setCopyState] = useState(false);
 
   const defaultUrl = "https://presale.vault-finance.com/presale?r=";
 
@@ -59,6 +60,23 @@ function ReferralWidget(props) {
     };
     init();
   }, [isConnected, address, updateFlag]);
+
+  const copyAction = () => {
+    setCopyState(true);
+    copyToClipboard(refUrl);
+    setTimeout(() => {
+      setCopyState(false)
+    }, 1000)
+  }
+
+  const copyToClipboard = (text) => {
+    let textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  }
 
   const getReferralCodeIfExsits = (address) => {
     axios
@@ -229,144 +247,139 @@ function ReferralWidget(props) {
   };
 
   return (
-    <Paper className="flex flex-col flex-auto p-24 shadow rounded-2xl overflow-hidden h-full">
-      <div className="flex flex-col sm:flex-row items-start justify-between">
-        <Typography className="text-lg font-medium tracking-tight leading-6 truncate">
-          Create Referral Link
-        </Typography>
-        <div className="mt-3 sm:mt-0 sm:ml-2"></div>
-      </div>
-      <div className="mt-10 mb-10">
-        <hr />
-      </div>
-      <div className="mb-10"></div>
-
-      <div className="flex flex-col flex-auto mt-10 mb-10">
-        <TextField
-          label="Referral Code"
-          size="small"
-          value={refCode}
-          disabled={!isConnected || !isBuyer || isCreatedRefCode}
-          onChange={(e) => handleRefCode(e)}
-        />
-
-        <FormHelperText id="component-helper-text">
-          Referral code should start with a letter and be at least 5
-          characters (max 12), with a mix of numbers and letters, NO symbols
-        </FormHelperText>
-      </div>
-      <div className="flex flex-col flex-auto mt-20 mb-10">
-        {!isConnected ? (
-          <div className="flex flex-col flex-auto mt-10 mb-10 items-center">
-            <Typography>Please connect your wallet!</Typography>
-          </div>
-        ) : !isBuyer ? (
-          <div className="flex flex-col flex-auto mt-10 mb-10 items-center">
-            <Typography>
-              Referral code creation valid only after purchase!
-            </Typography>
-          </div>
-        ) : (
-          <CopyField
-            disabled={true}
-            label="Referral link"
-            value={refUrl}
-            size="small"
-          />
-        )}
-      </div>
-      {isConnected && isBuyer ? (
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            bottom: "25px",
-            typography: "body1",
-            "& > :not(style) + :not(style)": {
-              ml: 2,
-            },
-          }}
-          className="gap-15 mt-10"
-        >
-          <Typography className="mt-5">Share on</Typography>
-          <Link
-            href={
-              "https://twitter.com/intent/tweet?text=%F0%9F%8E%89+I+just+participated+in+%40vaultfi_io+presale%21+%F0%9F%8E%89%0D%0A%0D%0AUse+my+link+and+get+5%25+bonus+tokens%21+%0D%0Ahttps%3A%2F%2Fpresale.vault-finance.com%2Fpresale%3Fr%3D$" +
-              refCode +
-              "%0D%0A%0D%0APre-sale+will+end+once+all+tokens+are+sold-out.+Don%27t+miss+out%21%0D%0A%0D%0A%40vaultfi_io+is+a+fully+audited+DeFi+protocol+with+APY+backed+by+revenue+generating+businesses+led+by+%40coinrockcap%0D%0A%0D%0A%23VaultFi+%23DeFi+%23CoinRock+%23Presale"
-            }
-            sx={{
-              background: "transparent !important",
-              borderBottom: "0 !important",
-            }}
-            target="_blank"
-          >
-            <img
-              className="w-full"
-              style={{ width: "30px" }}
-              src="assets/images/social-icons/x_white.svg"
-              alt="footer logo"
-            />
-          </Link>
-          <Link
-            href={
-              "https://t.me/share/url?url=https%3A%2F%2Fpresale.vault-finance.com%2Fpresale%3Fr%3D$" +
-              refCode +
-              "&text=%F0%9F%8E%89+I+just+participated+in+%40vaultfi_io+presale%21+%F0%9F%8E%89%0D%0A%0D%0AUse+my+link+and+get+5%25+bonus+tokens%21+%0D%0A"
-            }
-            sx={{
-              background: "transparent !important",
-              borderBottom: "0 !important",
-            }}
-            target="_blank"
-          >
-            <img
-              className="w-full"
-              style={{ width: "35px" }}
-              src="assets/images/social-icons/telegram_white.svg"
-              alt="footer logo"
-            />
-          </Link>
-        </Box>
-      ) : (
-        ""
-      )}
-      <div className="flex flex-col flex-auto mt-5"></div>
-
-      <div className="flex flex-col flex-auto mt-5 mb-10">
-        <LoadingButton
-          variant="contained"
-          color="primary"
-          disabled={!isConnected || !isBuyer || isCreatedRefCode}
-          loading={loading}
-          loadingPosition="end"
-          onClick={handleCreateRefCode}
-        >
-          Create Referral Code
-        </LoadingButton>
-        <div className="flex flex-col flex-auto mt-10"></div>
-      </div>
-
-      <Box
-        sx={{
-          backgroundColor: (_theme) =>
-            _theme.palette.mode === "light"
-              ? lighten(theme.palette.background.default, 0.4)
-              : lighten(theme.palette.background.default, 0.02),
-        }}
-        className="grid grid-cols-1 border-t divide-x -m-24 mt-10"
-      >
-        <div className="flex flex-col items-center justify-center p-24 sm:p-32">
-          <div className="text-5xl font-semibold leading-none tracking-tighter">
-            {formatNumberWithCommas(refereeCount)}
-          </div>
-          <Typography className="mt-4 text-center text-secondary">
-            Referrals
-          </Typography>
+    <>
+      <p className="text-left font-medium">
+        Create Referral Link
+      </p>
+      {/* <hr /> */}
+      <div className="flex md:flex-row flex-col">
+        <div className="md:w-1/2">
+          <p className="md:pt-4 text-white/70" id="component-helper-text">
+            Referral code should start with a letter and be at least 5
+            characters (max 12), with a mix of numbers and letters, NO symbols
+          </p>
         </div>
-      </Box>
-    </Paper>
+        <div className="flex flex-col md:w-1/2 gap-2 py-4">
+          <input
+            className="w-full p-2 bg-transparent border rounded-lg border-[var(--gold)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--gold)]"
+            placeholder="Referal Code"
+            value={refCode}
+            disabled={!isConnected || !isBuyer || isCreatedRefCode}
+            onChange={(e) => handleRefCode(e)}
+          />
+          <div className="flex flex-col flex-auto ">
+            {!isConnected ? (
+              <div className="flex flex-col flex-auto items-center">
+                <p className="font-lg text-white/70">Please connect your wallet!</p>
+              </div>
+            ) : !isBuyer ? (
+              <div className="flex flex-col flex-auto items-center">
+                <p className="font-lg text-white/70">
+                  Referral code creation valid only after purchase!
+                </p>
+              </div>
+            ) : (
+              <div className="relative">
+                <input
+                  className="w-full p-2 bg-transparent border rounded-lg border-[var(--gold)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--gold)]"
+                  disabled={true}
+                  value={refUrl}
+                />
+                <button onClick={copyAction} className="absolute top-[13px] right-[5px] flex bg-[var(--purple)] items-center ">
+                  <div className="group relative inline-block">
+                    <img src="icons/copy.svg" width={18} height={18} alt="CopyIcon" />
+                    <div
+                      className={copyState ? "hidden" : "group-hover:block" + " hidden z-50 absolute flex items-center justify-center leading-[0.6875rem] text-[11px] bg-white/20 rounded-full font-medium text-white py-[5px] px-[10px] whitespace-nowrap bottom-[-28px] right-[-5px]"}
+                      style={{ boxShadow: "rgba(0, 0, 0, 0.1) 5px 5px 10px 0px" }}>
+                      copy url
+                    </div>
+                    <div
+                      className={(copyState ? "flex" : "hidden") + " z-50 absolute items-center justify-center leading-[0.6875rem] text-[11px] bg-white/20 rounded-full font-medium text-white py-[5px] px-[10px] whitespace-nowrap bottom-[-28px] right-[-5px]"}
+                      style={{ boxShadow: "rgba(0, 0, 0, 0.1) 5px 5px 10px 0px" }}>
+                      copied
+                    </div>
+                  </div>
+                </button>
+              </div>
+            )}
+          </div>
+          {isConnected && isBuyer ? (
+            <div
+              className="flex items-center justify-center gap-2"
+            >
+              <p className="font-medium">Share on</p>
+              <Link
+                href={
+                  "https://twitter.com/intent/tweet?text=%F0%9F%8E%89+I+just+participated+in+%40vaultfi_io+presale%21+%F0%9F%8E%89%0D%0A%0D%0AUse+my+link+and+get+5%25+bonus+tokens%21+%0D%0Ahttps%3A%2F%2Fpresale.vault-finance.com%2Fpresale%3Fr%3D$" +
+                  refCode +
+                  "%0D%0A%0D%0APre-sale+will+end+once+all+tokens+are+sold-out.+Don%27t+miss+out%21%0D%0A%0D%0A%40vaultfi_io+is+a+fully+audited+DeFi+protocol+with+APY+backed+by+revenue+generating+businesses+led+by+%40coinrockcap%0D%0A%0D%0A%23VaultFi+%23DeFi+%23CoinRock+%23Presale"
+                }
+                sx={{
+                  background: "transparent !important",
+                  borderBottom: "0 !important",
+                }}
+                target="_blank"
+              >
+                <img
+                  className="w-full"
+                  style={{ width: "20px" }}
+                  src="/icons/x_white.svg"
+                  alt="footer logo"
+                />
+              </Link>
+              <Link
+                href={
+                  "https://t.me/share/url?url=https%3A%2F%2Fpresale.vault-finance.com%2Fpresale%3Fr%3D$" +
+                  refCode +
+                  "&text=%F0%9F%8E%89+I+just+participated+in+%40vaultfi_io+presale%21+%F0%9F%8E%89%0D%0A%0D%0AUse+my+link+and+get+5%25+bonus+tokens%21+%0D%0A"
+                }
+                sx={{
+                  background: "transparent !important",
+                  borderBottom: "0 !important",
+                }}
+                target="_blank"
+              >
+                <img
+                  className="w-full"
+                  style={{ width: "20px" }}
+                  src="/icons/telegram_white.svg"
+                  alt="footer logo"
+                />
+              </Link>
+            </div>
+          ) : (
+            ""
+          )}
+          <div className="flex flex-col flex-auto"></div>
+
+          <div className="flex flex-col flex-auto">
+            <LoadingButton
+              sx={{ fontSize: "16px" }}
+              variant="contained"
+              color="primary"
+              disabled={!isConnected || !isBuyer || isCreatedRefCode}
+              loading={loading}
+              loadingPosition="end"
+              onClick={handleCreateRefCode}
+            >
+              Create Referral Code
+            </LoadingButton>
+          </div>
+        </div>
+      </div>
+
+      <div className='flex justify-between'>
+        <p className="font-medium max-w-[200px] md:max-w-full">Your referrals</p>
+        <p className="font-medium text-[var(--green)]">{formatNumberWithCommas(refereeCount)}</p>
+      </div>
+      <div className='flex justify-between'>
+        <p className="font-medium max-w-[200px] md:max-w-full">Free bonus tokens earned via referrals</p>
+        <p className="font-medium text-[var(--green)]">0</p>
+      </div>
+      <button className="btn connect_wallet_btn text-center justify-center" onClick={() => disconnect()}>
+        Disconnect
+      </button>
+    </>
   );
 }
 
